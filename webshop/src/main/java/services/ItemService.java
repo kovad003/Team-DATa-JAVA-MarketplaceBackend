@@ -97,6 +97,7 @@ public class ItemService {
 		@Consumes(MediaType.APPLICATION_JSON)//Method receives object as a JSON string
 		@Path("/addjsonitem")
 		public Item receiveJsonItem(Item item) {
+			System.out.println("public Item receiveJsonItem(Item item) {");
 			String sql="INSERT INTO item (name, price, description, category) VALUES(?,?,?,?)";
 			
 			Connection conn=null;
@@ -146,9 +147,9 @@ public class ItemService {
 		 * void
 		 * This method deletes an item from then database based on the id number, which is received as a PathParam
 		 */
-		@GET
-//		@DELETE
-		@Path("/deleteitem")
+//		@GET
+		@DELETE
+		@Path("/deleteitem/{id}")
 //		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
 //		@Consumes(MediaType.APPLICATION_JSON)//Method receives object as a JSON string
 		public void deleteItem(@PathParam("id") int id) {
