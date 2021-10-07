@@ -31,6 +31,109 @@ import data.Item;
 @Path("/itemservice")
 
 public class ItemService {
+//	*********************************************************************************************************
+//	GET SERVICES ********************************************************************************************
+//	*********************************************************************************************************
+	/**
+	 * @return ArrayList<Item> list
+	 */
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
+	@Path("/getall")
+	public ArrayList<Item> getAllItem() {
+		String sql = "SELECT * FROM item";
+		ResultSet RS = null;
+		ArrayList<Item> list = new ArrayList<>();
+		Connection conn = null;
+		try {
+		    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
+		    	conn = Connections.getProductionConnection();
+		    }
+		    else {
+		    	conn = Connections.getDevConnection();
+		    }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			RS=stmt.executeQuery(sql);
+			while (RS.next()) {
+				Item item = new Item();
+				item.setId(RS.getInt("id"));
+				item.setName(RS.getString("name"));
+				item.setPrice(RS.getString("price"));
+				item.setDescription(RS.getString("description"));
+				item.setCategory(RS.getString("category"));
+				list.add(item);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (conn!=null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+//				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	/**
+	 * @param id
+	 * @return Item item
+	 * This method receives a PathParam called id, which is used to fetch specific data from the database
+	 */
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
+	@Path("/getitem/{id}")
+	public Item getItem(@PathParam("id") int id) {
+		String sql = "SELECT * FROM item WHERE id = ?;";
+		Item item = new Item();
+		ResultSet RS = null;
+		Connection conn=null;
+		try {
+		    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
+		    	conn = Connections.getProductionConnection();
+		    }
+		    else {
+		    	conn = Connections.getDevConnection();
+		    }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PreparedStatement pstmt;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			RS = pstmt.executeQuery();
+			while (RS.next()) {
+				item.setId(RS.getInt("id"));
+				item.setName(RS.getString("name"));
+				item.setPrice(RS.getString("price"));
+				item.setDescription(RS.getString("description"));
+				item.setCategory(RS.getString("category"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (conn!=null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+//				e.printStackTrace();
+			}
+		}
+		return item;
+	}
 //		*********************************************************************************************************
 //		POST SERVICES *******************************************************************************************
 //		*********************************************************************************************************
@@ -82,8 +185,7 @@ public class ItemService {
 					// TODO Auto-generated catch block
 //					e.printStackTrace();
 				}
-			}
-			
+			}			
 			return item;
 		}
 
@@ -134,199 +236,6 @@ public class ItemService {
 			}
 			
 			item.setName(item.getName());
-			return item;
-		}
-		
-//		*********************************************************************************************************
-//		DELETE SERVICES *****************************************************************************************
-//		*********************************************************************************************************
-		
-		
-		/**
-		 * @param id
-		 * void
-		 * This method deletes an item from then database based on the id number, which is received as a PathParam
-		 */
-//		@GET
-		@DELETE
-		@Path("/deleteitem/{id}")
-//		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
-//		@Consumes(MediaType.APPLICATION_JSON)//Method receives object as a JSON string
-		public void deleteItem(@PathParam("id") int id) {
-			System.out.println("public void deleteItem(@PathParam(\"id\") int id) {");
-			
-			String sql="DELETE FROM item WHERE id=?";			
-			Connection conn=null;
-			try {
-			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
-			    	conn = Connections.getProductionConnection();
-			    }
-			    else {
-			    	conn = Connections.getDevConnection();
-			    }
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			PreparedStatement pstmt;
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, id);
-				pstmt.execute();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (conn!=null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-//					e.printStackTrace();
-				}
-			}
-		}
-		
-		@DELETE
-		@Path("/deletejsonitem")
-		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
-		@Consumes(MediaType.APPLICATION_JSON)//Method receives object as a JSON string
-		public void deleteJsonItem(Item item) {
-			System.out.println("public void deleteJsonItem(Item item) {");
-			
-			String sql="DELETE FROM item WHERE id=?";			
-			Connection conn=null;
-			try {
-			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
-			    	conn = Connections.getProductionConnection();
-			    }
-			    else {
-			    	conn = Connections.getDevConnection();
-			    }
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			PreparedStatement pstmt;
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, item.getId());
-				pstmt.execute();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (conn!=null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-//					e.printStackTrace();
-				}
-			}
-		}
-		
-//		*********************************************************************************************************
-//		GET SERVICES ********************************************************************************************
-//		*********************************************************************************************************
-		/**
-		 * @return ArrayList<Item> list
-		 */
-		@GET
-		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
-		@Path("/getall")
-		public ArrayList<Item> getAllItem() {
-			String sql = "SELECT * FROM item";
-			ResultSet RS = null;
-			ArrayList<Item> list = new ArrayList<>();
-			Connection conn = null;
-			try {
-			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
-			    	conn = Connections.getProductionConnection();
-			    }
-			    else {
-			    	conn = Connections.getDevConnection();
-			    }
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			Statement stmt;
-			try {
-				stmt = conn.createStatement();
-				RS=stmt.executeQuery(sql);
-				while (RS.next()) {
-					Item item = new Item();
-					item.setId(RS.getInt("id"));
-					item.setName(RS.getString("name"));
-					item.setPrice(RS.getString("price"));
-					item.setDescription(RS.getString("description"));
-					item.setCategory(RS.getString("category"));
-					list.add(item);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (conn!=null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-//					e.printStackTrace();
-				}
-			}
-			return list;
-		}
-		
-		/**
-		 * @param id
-		 * @return Item item
-		 * This method receives a PathParam called id, which is used to fetch specific data from the database
-		 */
-		@GET
-		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
-		@Path("/getitem/{id}")
-		public Item getItem(@PathParam("id") int id) {
-			String sql = "SELECT * FROM item WHERE id = ?;";
-			Item item = new Item();
-			ResultSet RS = null;
-			Connection conn=null;
-			try {
-			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
-			    	conn = Connections.getProductionConnection();
-			    }
-			    else {
-			    	conn = Connections.getDevConnection();
-			    }
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			PreparedStatement pstmt;
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, id);
-				RS = pstmt.executeQuery();
-				while (RS.next()) {
-					item.setId(RS.getInt("id"));
-					item.setName(RS.getString("name"));
-					item.setPrice(RS.getString("price"));
-					item.setDescription(RS.getString("description"));
-					item.setCategory(RS.getString("category"));
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (conn!=null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-//					e.printStackTrace();
-				}
-			}
 			return item;
 		}
 		
@@ -386,9 +295,109 @@ public class ItemService {
 					conn.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-//					e.printStackTrace();
+					e.printStackTrace();
 				}
 			}
 			return item;
 		}
+		
+//		*********************************************************************************************************
+//		DELETE SERVICES *****************************************************************************************
+//		*********************************************************************************************************	
+		/**
+		 * @param id
+		 * void
+		 * This method deletes an item from then database based on the id number, which is received as a PathParam
+		 */
+//		@GET
+		@DELETE
+		@Path("/deleteitem/{id}")
+//		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
+//		@Consumes(MediaType.APPLICATION_JSON)//Method receives object as a JSON string
+		public boolean deleteItem(@PathParam("id") int id) {
+			System.out.println("public void deleteItem(@PathParam(\"id\") int id) {");
+			boolean removed = false; //Will be returned at the end -> feedback
+			String sql="DELETE FROM item WHERE id=?";
+			Connection conn=null;
+			try {
+			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
+			    	conn = Connections.getProductionConnection();
+			    }
+			    else {
+			    	conn = Connections.getDevConnection();
+			    }
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// Delete item
+			PreparedStatement pstmt;
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, id);
+				pstmt.execute();
+				// Verifying Removal
+				if (pstmt.getUpdateCount() == 1) { // Return the affected number of rows
+					removed = true;
+				}
+				System.out.println("pstmt.getUpdateCount() = " + pstmt.getUpdateCount());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return removed;
+		}
+		
+		@DELETE
+		@Path("/deletejsonitem")
+		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
+		@Consumes(MediaType.APPLICATION_JSON)//Method receives object as a JSON string
+		public boolean deleteJsonItem(Item item) {
+			System.out.println("public void deleteJsonItem(Item item) {");
+			boolean removed = false; //Will be returned at the end -> feedback
+			String sql="DELETE FROM item WHERE id=?";			
+			Connection conn=null;
+			try {
+			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
+			    	conn = Connections.getProductionConnection();
+			    }
+			    else {
+			    	conn = Connections.getDevConnection();
+			    }
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			PreparedStatement pstmt;
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, item.getId());
+				pstmt.execute();
+				// Verifying Removal
+				if (pstmt.getUpdateCount() == 1) { // Return the affected number of rows
+					removed = true;
+				}
+				System.out.println("pstmt.getUpdateCount() = " + pstmt.getUpdateCount());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return removed;
+		}		
 }
