@@ -1,24 +1,43 @@
 package data;
+//id, categoryId, customerId, title, price, description, image, condition, datePosted
 
-
+/**
+ * @author Dan
+ *	Data class for "item" table
+ */
 public class Item {
-	private int id;
-	private String name;
+	private int itemId;
+	private int categoryId;
+	private int customerId;
+	private String title;
 	private float price;
 	private String description;
-	private String category;
+	private String image;
+	private String condition;
 	
-	public int getId() {
-		return id;
+	public int getItemId() {
+		return itemId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
-	public String getName() {
-		return name;
+	public int getCustomerId() {
+		return customerId;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
+	public int getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public float getPrice() {
 		return price;
@@ -40,13 +59,19 @@ public class Item {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getCategory() {
-		return category;
+	public String getImage() {
+		return image;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getCondition() {
+		return condition;
+	}
+	public void setCondition(String condition) {
+		this.condition = condition;
 	}
 	public String toString() {
-		return id+" "+name+" "+price+" "+description+" "+category+"\n";
+		return itemId+" "+categoryId +" "+customerId+" "+" "+title+" "+price+" "+description+" "+condition+"\n";
 	}
 }

@@ -7,16 +7,24 @@
     <script>
 	    function sendData(itemform){
 	    	alert('sendData()'); // if no alert pops up that means a bug in the JS code
-	    	var item=new Object();
-	    	item.name=itemform.name.value;
-	    	item.price=itemform.price.value;
-	    	item.description=itemform.description.value;
-	    	item.category=itemform.category.value;
+	    	var item = new Object();
+	    	/* *******************************************************************
+	    		item.property -> has to be the same as in the data/object class!!!
+	    	*********************************************************************/
+	    	item.categoryId = itemform.categoryid.value;
+	    	item.customerId = itemform.customerid.value;
+	    	item.title = itemform.title.value;
+	    	item.price = itemform.price.value;
+	    	item.description = itemform.description.value;
+	    	item.image = itemform.image.value;
+	    	item.condition = itemform.condition.value;
 	    	
 	    	var x=JSON.stringify(item);
 	    	
 	    	xmlhttp = new XMLHttpRequest();
 	    	xmlhttp.onreadystatechange = function() {
+	    	//alert('this.readyState = ' + this.readyState);
+	    	//alert('this.status = ' + this.status);
 	    	  if (this.readyState == 4 && this.status == 200) {
 	    		  	alert('OK: ' + 'this.readyState == 4 && this.status == 200');
 					document.getElementById("result").innerHTML = this.responseText; // Will grab the HTML element identified by the result ID and prints the response there
@@ -30,12 +38,18 @@
 	    
 	    function sendDataUpdate(itemform){
 	    	alert('sendDataUpdate()'); // if no alert pops up that means a bug in the JS code
-	    	var item=new Object();
-	    	item.id=itemform.id.value;
-	    	item.name=itemform.name.value;
-	    	item.price=itemform.price.value;
-	    	item.description=itemform.description.value;
-	    	item.category=itemform.category.value;
+	    	var item = new Object();
+	    	/* *******************************************************************
+    		item.property -> has to be the same as in the data/object class!!!
+    		*********************************************************************/
+	    	item.itemId = itemform.itemid.value;
+	    	item.categoryId = itemform.categoryid.value;
+	    	item.customerId = itemform.customerid.value;
+	    	item.title = itemform.title.value;
+	    	item.price = itemform.price.value;
+	    	item.description = itemform.description.value;
+	    	item.image = itemform.image.value;
+	    	item.condition = itemform.condition.value;
 	    	
 	    	var x=JSON.stringify(item);
 	    	
@@ -54,10 +68,10 @@
 	    
 	    function deleteData(itemform){
 	    	alert('deleteData()'); // if no alert pops up that means a bug in the JS code
-	    	var item=new Object();
-	    	item.id=itemform.id.value;
+	    	var item = new Object();
+	    	item.itemId=itemform.itemid.value;
 	    	
-	    	var x=JSON.stringify(item);
+	    	var x = JSON.stringify(item);
 	    	
 	    	xmlhttp = new XMLHttpRequest();
 	    	xmlhttp.onreadystatechange = function() {
@@ -80,19 +94,27 @@
 
 <h2>Form parameters -- working</h2>
 	<form action='./rest/itemservice/additem' method='post'>
-	Name: <input type='text' name='name' value=''><br>
-	Price: <input type='text' name='price' value=''><br>
-	Description: <input type='text' name='description' value=''><br>
-	Category: <input type='text' name='category' value=''><br>
+	CategoryId: <input type='text' name='categoryid' value='1'><br>
+	CustomerId: <input type='text' name='customerid' value='2'><br>
+	Title: <input type='text' name='title' value='some title'><br>
+	Price: <input type='text' name='price' value='55'><br>
+	Description: <input type='text' name='description' value='Chuck Norris'><br>
+	Image: <input type='text' name='image' 
+		value='image'><br>
+	Condition: <input type='text' name='condition' value='used'><br>
 	<input type='submit' name='ok' value='OK'><br>
 	</form>
 
 <h2>ADD JSON String -- working</h2>
 	<form id ='formJSON'action='./rest/itemservice/addjsonitem' method='post'>
-	Name: <input type='text' name='name' value=''><br>
-	Price: <input type='text' name='price' value=''><br>
-	Description: <input type='text' name='description' value=''><br>
-	Category: <input type='text' name='category' value=''><br>
+	CategoryId: <input type='text' name='categoryid' value='1'><br>
+	CustomerId: <input type='text' name='customerid' value='2'><br>
+	Title: <input type='text' name='title' value='some title'><br>
+	Price: <input type='text' name='price' value='55'><br>
+	Description: <input type='text' name='description' value='Chuck Norris'><br>
+	Image: <input type='text' name='image' 
+		value='https://media.idownloadblog.com/wp-content/uploads/2012/03/Chuck-Norris-Angry-Siri-400x320.jpg'><br>
+	Condition: <input type='text' name='condition' value='used'><br>
 	<input type='button' name='ok' value='OK' onclick="sendData(this.form)" ><br>
 	</form>
 <p id='result'>
@@ -101,11 +123,16 @@ The result comes here
 
 <h2>UPDATE JSON String -- working</h2>
 	<form id ='formJSONupdate'action='./rest/itemservice/updatejsonitem' method='post'>
-	Id: <input type='text' name='id' value=''><br>
-	Name: <input type='text' name='name' value=''><br>
-	Price: <input type='text' name='price' value=''><br>
-	Description: <input type='text' name='description' value=''><br>
-	Category: <input type='text' name='category' value=''><br>
+	ItemId: <input type='text' name='itemid' value=''><br>
+	CategoryId: <input type='text' name='categoryid' value='2'><br>
+	CustomerId: <input type='text' name='customerid' value='6'><br>
+	Title: <input type='text' name='title' value='new title'><br>
+	Price: <input type='text' name='price' value='99.9'><br>
+	Description: <input type='text' name='description' value='Steven Seagal'><br>
+	Image: <input type='text' name='image' 
+		value='https://images.wallpapersden.com/image/wxl-steven-seagal-brunette-face_53269.jpg'
+		placeholder='https://images.wallpapersden.com/image/wxl-steven-seagal-brunette-face_53269.jpg'><br>
+	Condition: <input type='text' name='condition' value=''><br>
 	<input type='button' name='ok' value='OK' onclick="sendDataUpdate(this.form)" ><br>
 	</form>
 <p id='update_result'>
@@ -114,7 +141,7 @@ The result comes here
 
 <h2>Delete JSON item -- working</h2>
 	<form id ='formJSONDelete'action='./rest/itemservice/deletejsonitem' method='get'>
-	Id: <input type='text' name='id' value=''><br>
+	ItemId: <input type='text' name='itemid' value=''><br>
 	<input type='button' name='ok' value='OK' onclick="deleteData(this.form)" ><br>
 	</form>
 <p id='delete_result'>

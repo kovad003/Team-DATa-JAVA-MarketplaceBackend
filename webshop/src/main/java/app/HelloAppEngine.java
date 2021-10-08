@@ -37,15 +37,22 @@ public class HelloAppEngine extends HttpServlet {
 	    response.setCharacterEncoding("UTF-8");
 	    PrintWriter out=response.getWriter();
 	    
-	    String breed=request.getParameter("breed");
-	    String weight=request.getParameter("weight");
+	    String itemId = request.getParameter("itemid");
+	    String customerId = request.getParameter("customerid");
+	    String categoryId = request.getParameter("categoryid");
+	    String title = request.getParameter("title");
+	    String price = request.getParameter("price");
+	    String description = request.getParameter("description");
+	    String image = request.getParameter("image");
+	    String condition = request.getParameter("condition");
+
 	    
 	    
 	    
-	    ArrayList<Item> fishlist=new ArrayList<>();
+	    ArrayList<Item> itemlist=new ArrayList<>();
 		util.HTML.printStart(out);
 	    Connection conn=null;
-	    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
+	    if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {  
 	    	out.println("Production version");
 	    	try {
 				conn=Connections.getProductionConnection();
@@ -66,20 +73,22 @@ public class HelloAppEngine extends HttpServlet {
 	    try {
 	    	if (conn!=null) {
 				Statement stmt=conn.createStatement();
-				ResultSet RS=stmt.executeQuery("select * from fish");
+				ResultSet RS=stmt.executeQuery("select * from item");
 				
 				while (RS.next()) {
-					Item f=new Item();
-					f.setId(RS.getInt("id"));
-					f.setName(RS.getString("breed"));
-					f.setPrice(RS.getString("weight"));
-//					f.setLength(RS.getString("length"));
-//					f.setCity(RS.getString("city"));
-//					f.setWater(RS.getString("water"));
-					fishlist.add(f);
+					Item item=new Item();
+					item.setItemId(RS.getInt("itemId"));
+					item.setCategoryId(RS.getInt("categoryId"));
+					item.setCustomerId(RS.getInt("customerId"));
+					item.setTitle(RS.getString("title"));
+					item.setPrice(RS.getString("price"));
+					item.setDescription(RS.getString("description"));
+					item.setImage(RS.getString("image"));
+					item.setCondition(RS.getString("condition"));
+					itemlist.add(item);
 				}
 				conn.close();
-				util.HTML.printTable(out, fishlist);
+				util.HTML.printTable(out, itemlist);
 	    	}
 	    	else {
 	    		out.println("No connection to database!");

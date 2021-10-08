@@ -20,8 +20,8 @@ public class HTML {
 		out.println("<table border='1'>");
 		for (int i=0;i<fishlist.size();i++) {
 			Item f=fishlist.get(i);
-			out.println("<tr><td>"+f.getId()+"<td>"+f.getName()+"<td>"+f.getPrice()+
-					"<td><a href='#' onclick='deleteFish("+f.getId()+");return false;'>Poista</a>");
+			out.println("<tr><td>"+f.getItemId()+"<td>"+f.getTitle()+"<td>"+f.getPrice()+
+					"<td><a href='#' onclick='deleteFish("+f.getItemId()+");return false;'>Poista</a>");
 		}
 		out.println("</table>");
 		out.println("<div id='loginout'>Log In Out</div>");

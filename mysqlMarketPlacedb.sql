@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS webshopdb;
+ddddDROP DATABASE IF EXISTS webshopdb;
 create database webshopdb;
 use webshopdb;
 GRANT ALL on webshopdb.* to nobody@localhost identified by 'kukucs';
