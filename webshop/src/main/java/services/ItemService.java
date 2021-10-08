@@ -62,11 +62,12 @@ public class ItemService {
 			while (RS.next()) {
 				Item item = new Item();
 				item.setItemId(RS.getInt("itemId"));
-				item.setItemId(RS.getInt("categoryId"));
-				item.setItemId(RS.getInt("customerId"));
+				item.setCategoryId(RS.getInt("categoryId"));
+				item.setCustomerId(RS.getInt("customerId"));
 				item.setTitle(RS.getString("title"));
 				item.setPrice(RS.getString("price"));
 				item.setDescription(RS.getString("description"));
+				item.setImage(RS.getString("image"));
 				item.setCondition(RS.getString("condition"));
 				item.setDatePosted(RS.getTimestamp("datePosted"));
 				list.add(item);
@@ -86,14 +87,16 @@ public class ItemService {
 		return list;
 	}
 	
+	
 	/**
 	 * @param id
 	 * @return Item item
 	 * This method receives a PathParam called id, which is used to fetch specific data from the database
 	 */
 	@GET
+	//@Consumes(MediaType.APPLICATION_XHTML_XML)
 	@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
-	@Path("/getitem/{id}")
+	@Path("/getjsonitemtoupdate/{id}")
 	public Item getItem(@PathParam("id") int id) {
 		String sql = "SELECT * FROM item WHERE itemId = ?;";
 		Item item = new Item();
@@ -116,11 +119,15 @@ public class ItemService {
 			pstmt.setInt(1, id);
 			RS = pstmt.executeQuery();
 			while (RS.next()) {
-				item.setItemId(RS.getInt("id"));
-				item.setTitle(RS.getString("name"));
+				item.setItemId(RS.getInt("itemId"));
+				item.setCategoryId(RS.getInt("categoryId"));
+				item.setCustomerId(RS.getInt("customerId"));
+				item.setTitle(RS.getString("title"));
 				item.setPrice(RS.getString("price"));
 				item.setDescription(RS.getString("description"));
-				item.setCondition(RS.getString("category"));
+				item.setImage(RS.getString("image"));
+				item.setCondition(RS.getString("condition"));
+				item.setDatePosted(RS.getTimestamp("datePosted"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
