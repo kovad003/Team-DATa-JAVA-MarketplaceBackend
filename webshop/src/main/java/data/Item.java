@@ -1,4 +1,7 @@
 package data;
+
+import java.sql.Timestamp;
+
 //id, categoryId, customerId, title, price, description, image, condition, datePosted
 
 /**
@@ -14,6 +17,7 @@ public class Item {
 	private String description;
 	private String image;
 	private String condition;
+	private Timestamp datePosted;
 	
 	public int getItemId() {
 		return itemId;
@@ -71,7 +75,13 @@ public class Item {
 	public void setCondition(String condition) {
 		this.condition = condition;
 	}
+	public Timestamp getDatePosted() {
+		return datePosted;
+	}
+	public void setDatePosted(Timestamp datePosted) {
+		this.datePosted = datePosted;
+	}
 	public String toString() {
-		return itemId+" "+categoryId +" "+customerId+" "+" "+title+" "+price+" "+description+" "+condition+"\n";
+		return itemId+" "+categoryId +" "+customerId+" "+" "+title+" "+price+" "+description+" "+condition+" "+datePosted+"\n";
 	}
 }

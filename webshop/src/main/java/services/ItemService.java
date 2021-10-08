@@ -68,6 +68,7 @@ public class ItemService {
 				item.setPrice(RS.getString("price"));
 				item.setDescription(RS.getString("description"));
 				item.setCondition(RS.getString("condition"));
+				item.setDatePosted(RS.getTimestamp("datePosted"));
 				list.add(item);
 			}
 		} catch (SQLException e) {
@@ -262,18 +263,19 @@ public class ItemService {
 		public Item updateJsonItem(Item item) {
 			System.out.println("public Item updateItem(Item item) {");
 			System.out.println("item => " + item);
-			
-			String sql = "UPDATE item SET "
-					/* 1 */ + "categoryId = ?, "
-					/* 2 */ + "customerId = ?, "
-					/* 3 */ + "title = ?, "
-					/* 4 */ + "price = ? "
-					/* 5 */ + "description = ? "
-					/* 6 */ + "image = ? "
-					/* 7 */ + "`condition` = ? "
-					/* 8 */ + "WHERE itemId = ?;";
 			System.out.println("item.getImage() = " + item.getImage());
-			// itemId, categoryId, customerId, title, price, description, image, condition, datePosted
+	
+			String sql = "UPDATE item SET "
+					/*1*/ + "categoryId = ?, "
+					/*2*/ + "customerId = ?, "
+					/*3*/ + "title = ?, "
+					/*4*/	+ "price = ?, "
+					/*5*/ + "description = ?, "
+					/*6*/ + "image = ?, "
+					/*7*/ + "`condition` = ? "
+					/*8*/ + "WHERE itemId = ?;"; // datePosted (Timestamp) will be updated by MySQL		
+			System.out.println("sql => " + sql);		
+
 			Connection conn = null;
 			try {
 			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
@@ -282,8 +284,10 @@ public class ItemService {
 			    else {
 			    	conn = Connections.getDevConnection();
 			    }
+			    System.out.println("Connection: " + conn);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
+				System.out.println("No conn!");
 				e.printStackTrace();
 			}
 			PreparedStatement pstmt;
@@ -294,11 +298,10 @@ public class ItemService {
 				pstmt.setString(3, item.getTitle());
 				pstmt.setFloat(4, item.getPrice());
 				pstmt.setString(5, item.getDescription());
-				pstmt.setString(6, item.getImage());
+				pstmt.setString(6, item.getImage().toString());
 				pstmt.setString(7, item.getCondition());
 				pstmt.setInt(8, item.getItemId());
 				pstmt.executeUpdate();
-				System.out.println("sql => " + sql);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

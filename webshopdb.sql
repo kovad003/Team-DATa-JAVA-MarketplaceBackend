@@ -16,7 +16,7 @@ price decimal(10,2) NOT NULL,
 description varchar(75) NOT NULL,
 image varchar(255) NOT NULL,
 `condition` varchar(25) NOT NULL,
-#datePosted timestamp,
+datePosted timestamp,
 PRIMARY KEY (itemId)
 );
 
@@ -52,4 +52,5 @@ DELETE FROM item WHERE id=15 LIMIT ROW_COUNT;
 SELECT ROW_COUNT(); #Checks deleted rows
 INSERT INTO item (categoryId, customerId, title, price, description, image, `condition`) VALUES
 (3,3,"dd", 4,"d","d","d");
+UPDATE item SET categoryId = 111, customerId = 111, title = "newtitle", price = 111, description = "new descr", image = "https://images.wallpapersden.com/image/wxl-steven-seagal-brunette-face_53269.jpg", `condition` = "updated condition" WHERE itemId = 1;
 */

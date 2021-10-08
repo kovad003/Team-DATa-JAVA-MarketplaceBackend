@@ -132,7 +132,7 @@ The result comes here
 	Image: <input type='text' name='image' 
 		value='https://images.wallpapersden.com/image/wxl-steven-seagal-brunette-face_53269.jpg'
 		placeholder='https://images.wallpapersden.com/image/wxl-steven-seagal-brunette-face_53269.jpg'><br>
-	Condition: <input type='text' name='condition' value=''><br>
+	Condition: <input type='text' name='condition' value='updated condition'><br>
 	<input type='button' name='ok' value='OK' onclick="sendDataUpdate(this.form)" ><br>
 	</form>
 <p id='update_result'>
