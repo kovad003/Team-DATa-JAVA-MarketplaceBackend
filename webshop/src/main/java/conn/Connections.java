@@ -43,7 +43,7 @@ public class Connections {
 		HikariConfig config = new HikariConfig();
 		 // Configure which instance and what database user to connect with.
 		config.setDriverClassName(System.getProperty("drivername")); // see appengine-web.xml
-		config.setJdbcUrl("jdbc:mysql://localhost:3306/"+System.getProperty("databasename")); // see appengine-web.xml
+		config.setJdbcUrl("jdbc:mysql://localhost:3306/"+System.getProperty("databasename")+"?characterEncoding=latin1&useConfigs=maxPerformance"); // see appengine-web.xml
 		config.setUsername(System.getProperty("localusername")); // see appengine-web.xml
 		config.setPassword(System.getProperty("localpassword")); // see appengine-web.xml
 		
