@@ -232,10 +232,14 @@ public class CustomerService {
 			PreparedStatement pstmt;
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, customer.getName());
-				pstmt.setFloat(2,  customer.getPrice());
-				pstmt.setString(3, customer.getDescription());
-				pstmt.setString(4, customer.getCategory());
+				pstmt.setString(1, customer.getId());
+				pstmt.setString(2, customer.getName());
+				pstmt.setString(3, customer.getFamily());
+				pstmt.setString(4, customer.getDateOfBirth());
+				pstmt.setString(5, customer.getEmail());
+				pstmt.setString(6, customer.getPhone());
+				pstmt.setString(7, customer.getImageUrl());
+
 				pstmt.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -267,9 +271,11 @@ public class CustomerService {
 			
 			String sql = "UPDATE customer SET "
 					+ "name = ?, "
-					+ "price = ?, "
-					+ "description = ?, "
-					+ "category = ? "
+					+ "family = ?, "
+					+ "dateofbirth = ?, "
+					+ "email = ?, "
+					+ "phone = ? "
+					+ "imageurl = ? "
 					+ "WHERE id = ?;";
 			
 			System.out.println("sql => " + sql);
@@ -296,10 +302,12 @@ public class CustomerService {
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, customer.getName());
-				pstmt.setFloat(2, customer.getPrice());
-				pstmt.setString(3, customer.getDescription());
-				pstmt.setString(4, customer.getCategory());
-				pstmt.setInt(5, customer.getId());
+				pstmt.setString(2, customer.getFamily());
+				pstmt.setString(3, customer.getDateOfBirth());
+				pstmt.setString(4, customer.getEmail());
+				pstmt.setString(5, customer.getPhone());
+				pstmt.setString(6, customer.getImageUrl());
+				pstmt.setString(7, customer.getId());
 				pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -394,7 +402,7 @@ public class CustomerService {
 			PreparedStatement pstmt;
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, customer.getId());
+				pstmt.setString(1, customer.getId());
 				pstmt.execute();
 				// Verifying Removal
 				if (pstmt.getUpdateCount() == 1) { // Return the affected number of rows
