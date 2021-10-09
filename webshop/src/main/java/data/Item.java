@@ -2,8 +2,6 @@ package data;
 
 import java.sql.Timestamp;
 
-//id, categoryId, customerId, title, price, description, image, condition, datePosted
-
 /**
  * @author Dan
  *	Data class for "item" table
@@ -17,6 +15,7 @@ public class Item {
 	private String description;
 	private String image;
 	private String condition;
+	private String location;
 	private Timestamp datePosted;
 	
 	public int getItemId() {
@@ -74,6 +73,12 @@ public class Item {
 	}
 	public void setCondition(String condition) {
 		this.condition = condition;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	public Timestamp getDatePosted() {
 		return datePosted;

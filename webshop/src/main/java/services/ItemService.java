@@ -40,6 +40,7 @@ public class ItemService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getall")
 	public ArrayList<Item> getAllItem() {
+		System.out.println("public ArrayList<Item> getAllItem() {");
 		String sql = "SELECT * FROM item";
 		ResultSet RS = null;
 		ArrayList<Item> list = new ArrayList<>();
@@ -69,6 +70,7 @@ public class ItemService {
 				item.setDescription(RS.getString("description"));
 				item.setImage(RS.getString("image"));
 				item.setCondition(RS.getString("condition"));
+				item.setLocation(RS.getString("location"));
 				item.setDatePosted(RS.getTimestamp("datePosted"));
 				list.add(item);
 			}
@@ -127,6 +129,7 @@ public class ItemService {
 				item.setDescription(RS.getString("description"));
 				item.setImage(RS.getString("image"));
 				item.setCondition(RS.getString("condition"));
+				item.setLocation(RS.getString("location"));
 				item.setDatePosted(RS.getTimestamp("datePosted"));
 			}
 		} catch (SQLException e) {
@@ -157,7 +160,8 @@ public class ItemService {
 				@FormParam("price") float price,
 				@FormParam("image") String image,
 				@FormParam("description") String description,
-				@FormParam("condition") String condition){
+				@FormParam("condition") String condition,
+				@FormParam("location") String location){
 			System.out.println("public Item addFormItem(");
 			Item item=new Item();
 			item.setCategoryId(categoryid);
@@ -167,8 +171,9 @@ public class ItemService {
 			item.setDescription(description);
 			item.setImage(image);
 			item.setCondition(condition);
+			item.setLocation(location);
 						
-			String sql="INSERT INTO item (categoryId, customerId, title, price, description, image, `condition`) VALUES(?,?,?,?,?,?,?)";
+			String sql="INSERT INTO item (categoryId, customerId, title, price, description, image, `condition`, location) VALUES(?,?,?,?,?,?,?,?)";
 			
 			Connection conn=null;
 			try {
@@ -192,6 +197,7 @@ public class ItemService {
 				pstmt.setString(5, item.getDescription());
 				pstmt.setString(6, item.getImage());
 				pstmt.setString(7, item.getCondition());
+				pstmt.setNString(8, item.getLocation());
 				pstmt.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -219,7 +225,7 @@ public class ItemService {
 		@Path("/addjsonitem")
 		public Item addJsonItem(Item item) {
 			System.out.println("public Item addJsonItem(Item item) {");
-			String sql="INSERT INTO item (categoryId, customerId, title, price, description, image, `condition`) VALUES(?,?,?,?,?,?,?)";
+			String sql="INSERT INTO item (categoryId, customerId, title, price, description, image, `condition`, location) VALUES(?,?,?,?,?,?,?,?)";
 			Connection conn=null;
 			try {
 			    if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {  
@@ -242,6 +248,7 @@ public class ItemService {
 				pstmt.setString(5, item.getDescription());
 				pstmt.setString(6, item.getImage());
 				pstmt.setString(7, item.getCondition());
+				pstmt.setNString(8, item.getLocation());
 				pstmt.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -276,11 +283,12 @@ public class ItemService {
 					/*1*/ + "categoryId = ?, "
 					/*2*/ + "customerId = ?, "
 					/*3*/ + "title = ?, "
-					/*4*/	+ "price = ?, "
+					/*4*/ + "price = ?, "
 					/*5*/ + "description = ?, "
 					/*6*/ + "image = ?, "
-					/*7*/ + "`condition` = ? "
-					/*8*/ + "WHERE itemId = ?;"; // datePosted (Timestamp) will be updated by MySQL		
+					/*7*/ + "`condition` = ?, "
+					/*8*/ + "location = ? "
+					/*9*/ + "WHERE itemId = ?;"; // datePosted (Timestamp) will be updated by MySQL		
 			System.out.println("sql => " + sql);		
 
 			Connection conn = null;
@@ -307,7 +315,8 @@ public class ItemService {
 				pstmt.setString(5, item.getDescription());
 				pstmt.setString(6, item.getImage().toString());
 				pstmt.setString(7, item.getCondition());
-				pstmt.setInt(8, item.getItemId());
+				pstmt.setString(8, item.getLocation());
+				pstmt.setInt(9, item.getItemId());
 				pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

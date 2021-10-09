@@ -16,25 +16,26 @@ price decimal(10,2) NOT NULL,
 description varchar(75) NOT NULL,
 image varchar(255) NOT NULL,
 `condition` varchar(25) NOT NULL,
+location varchar (55) NOT NULL,
 datePosted timestamp,
 PRIMARY KEY (itemId)
 );
 
-INSERT INTO item (categoryId, customerId, title, price, description, image, `condition`) VALUES
+INSERT INTO item (categoryId, customerId, title, price, description, image, `condition`, location) VALUES
 (1, 1001, "Dell notebook", 150,
 "I have just bought a desktop PC so I do not need this any longer.", 
 "https://i0.wp.com/cdn.mos.cms.futurecdn.net/zM9p9D2RUQebhKR3CieqZA.jpg",
-"used"),
+"used", "Hameenlinna"),
 
 (2, 1002, "Grey Sofa", 69.99, 
 "Granny's old sofa. She got bored after 34 years...", 
 "https://moderntovintage.com/wp-content/uploads/2017/08/Photo-Aug-01-2-08-05-PM-300x225.jpg",
-"used"),
+"used", "Hameenlinna"),
 
 (3, 1003, "Running shoes", 250, 
 "Brand new running shoe. Ideal for longer distances.", 
 "http://4.bp.blogspot.com/-PKLvGmPzWn8/Tz3iUwonF2I/AAAAAAAAAIo/6T3zlIBhJ3o/s400/adidas+running+shoes.jpg",
-"new");
+"new", "Hameenlinna");
 
 
 DESCRIBE item;

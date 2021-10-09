@@ -39,6 +39,7 @@
 	    	item.description = itemform.description.value;
 	    	item.image = itemform.image.value;
 	    	item.condition = itemform.condition.value;
+	    	item.location = itemform.location.value;
 	    	
 	    	var x=JSON.stringify(item);
 	    	
@@ -71,6 +72,7 @@
 	    	item.description = itemform.description.value;
 	    	item.image = itemform.image.value;
 	    	item.condition = itemform.condition.value;
+	    	item.location = itemform.location.value;
 	    	
 	    	var x=JSON.stringify(item);
 	    	
@@ -138,6 +140,7 @@ results...
 	Image: <input type='text' name='image' 
 		value='image'><br>
 	Condition: <input type='text' name='condition' value='used'><br>
+	Location: <input type='text' name='location' value='Hameenlinna'><br>
 	<input type='submit' name='ok' value='OK'><br>
 	</form>
 
@@ -151,6 +154,7 @@ results...
 	Image: <input type='text' name='image' 
 		value='https://media.idownloadblog.com/wp-content/uploads/2012/03/Chuck-Norris-Angry-Siri-400x320.jpg'><br>
 	Condition: <input type='text' name='condition' value='used'><br>
+	Location: <input type='text' name='location' value='Hameenlinna'><br>
 	<input type='button' name='ok' value='OK' onclick="sendData(this.form)" ><br>
 	</form>
 <p id='result'>
@@ -169,6 +173,7 @@ The result comes here
 		value='https://images.wallpapersden.com/image/wxl-steven-seagal-brunette-face_53269.jpg'
 		placeholder='https://images.wallpapersden.com/image/wxl-steven-seagal-brunette-face_53269.jpg'><br>
 	Condition: <input type='text' name='condition' value='updated condition'><br>
+	Location: <input type='text' name='location' value='Hameenlinna'><br>
 	<input type='button' name='ok' value='OK' onclick="sendDataUpdate(this.form)" ><br>
 	</form>
 <p id='update_result'>
