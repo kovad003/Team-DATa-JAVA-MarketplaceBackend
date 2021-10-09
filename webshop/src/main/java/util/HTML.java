@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import data.Item;
+import data.Category;
+
 
 public class HTML {
 	public static void printStart(PrintWriter out) {

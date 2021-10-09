@@ -62,8 +62,9 @@ public class CategoryService {
 			RS=stmt.executeQuery(sql);
 			while (RS.next()) {
 				Category cat = new Category();
-				cat.setId(RS.getInt("id"));
+				cat.setId(RS.getString("id"));
 				cat.setTitle(RS.getString("title"));
+				cat.setColor(RS.getString("color"));
 				cat.setDescription(RS.getString("description"));
 				cat.setImageUrl(RS.getString("imageurl"));
 				
@@ -88,7 +89,7 @@ public class CategoryService {
 	
 	
 	
-	
+	/**************************************************************************************************************
 	/*************************************************************************************************************
 	/ HH - For now just create the get all 
 	/ HH - under this line is not ready to use yet
