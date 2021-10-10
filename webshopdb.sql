@@ -96,8 +96,8 @@ CREATE TABLE city(
 cityId INT NOT NULL AUTO_INCREMENT,
 regionId INT NOT NULL,
 cityName VARCHAR(55) NOT NULL,
-latitude INT NOT NULL,
-longitude INT NOT NULL,
+latitude FLOAT(10,4) NOT NULL, /*10 digit in total, 4 digit as decimal*/
+longitude FLOAT(10,4) NOT NULL,
 PRIMARY KEY (cityId));
 
 INSERT INTO city(regionId, cityName, latitude, longitude)VALUES
