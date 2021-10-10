@@ -1,5 +1,6 @@
 package services;
 
+
 import java.sql.Connection;
 
 
@@ -22,28 +23,27 @@ import com.google.appengine.api.utils.SystemProperty;
 import java.sql.Statement;
 
 import conn.Connections;
-import data.Item;
+import data.Customer;
 /**
  * @author Dan
- *	This class contains all the service related to the item table.
+ *	This class contains all the service related to the customer table.
  */
-@Path("/itemservice")
+@Path("/customerservice")
 
-public class ItemService {
+public class CustomerService {
 //	*********************************************************************************************************
 //	GET SERVICES ********************************************************************************************
 //	*********************************************************************************************************
 	/**
-	 * @return list of ArrayList<Item> type
+	 * @return ArrayList<Customer> list
 	 */
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
 	@Path("/getall")
-	public ArrayList<Item> getAllItem() {
-		System.out.println("public ArrayList<Item> getAllItem() {");
-		String sql = "SELECT * FROM item";
+	public ArrayList<Customer> getAllCustomer() {
+		String sql = "SELECT * FROM customer";
 		ResultSet RS = null;
-		ArrayList<Item> list = new ArrayList<>();
+		ArrayList<Customer> list = new ArrayList<>();
 		Connection conn = null;
 		try {
 		    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
@@ -61,18 +61,17 @@ public class ItemService {
 			stmt = conn.createStatement();
 			RS=stmt.executeQuery(sql);
 			while (RS.next()) {
-				Item item = new Item();
-				item.setItemId(RS.getInt("itemId"));
-				item.setCategoryId(RS.getInt("categoryId"));
-				item.setCustomerId(RS.getInt("customerId"));
-				item.setTitle(RS.getString("title"));
-				item.setPrice(RS.getString("price"));
-				item.setDescription(RS.getString("description"));
-				item.setImage(RS.getString("image"));
-				item.setCondition(RS.getString("condition"));
-				item.setLocation(RS.getString("location"));
-				item.setDatePosted(RS.getTimestamp("datePosted"));
-				list.add(item);
+				Customer customer = new Customer();
+				customer.setId(RS.getString("id"));
+				customer.setName(RS.getString("name"));
+				customer.setFamily(RS.getString("family"));
+				customer.setDateOfBirth(RS.getString("dateofbirth"));
+				customer.setEmail(RS.getString("email"));
+				customer.setPhone(RS.getString("phone"));
+				customer.setImageUrl(RS.getString("imageurl"));
+
+				
+				list.add(customer);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -89,19 +88,17 @@ public class ItemService {
 		return list;
 	}
 	
-	
 	/**
 	 * @param id
-	 * @return Item item
+	 * @return Customer customer
 	 * This method receives a PathParam called id, which is used to fetch specific data from the database
 	 */
 	@GET
-	//@Consumes(MediaType.APPLICATION_XHTML_XML)
 	@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
-	@Path("/getjsonitemtoupdate/{id}")
-	public Item getItem(@PathParam("id") int id) {
-		String sql = "SELECT * FROM item WHERE itemId = ?;";
-		Item item = new Item();
+	@Path("/getcustomer/{id}")
+	public Customer getCustomer(@PathParam("id") int id) {
+		String sql = "SELECT * FROM customer WHERE id = ?;";
+		Customer customer = new Customer();
 		ResultSet RS = null;
 		Connection conn=null;
 		try {
@@ -121,16 +118,13 @@ public class ItemService {
 			pstmt.setInt(1, id);
 			RS = pstmt.executeQuery();
 			while (RS.next()) {
-				item.setItemId(RS.getInt("itemId"));
-				item.setCategoryId(RS.getInt("categoryId"));
-				item.setCustomerId(RS.getInt("customerId"));
-				item.setTitle(RS.getString("title"));
-				item.setPrice(RS.getString("price"));
-				item.setDescription(RS.getString("description"));
-				item.setImage(RS.getString("image"));
-				item.setCondition(RS.getString("condition"));
-				item.setLocation(RS.getString("location"));
-				item.setDatePosted(RS.getTimestamp("datePosted"));
+				customer.setId(RS.getString("id"));
+				customer.setName(RS.getString("name"));
+				customer.setFamily(RS.getString("family"));
+				customer.setDateOfBirth(RS.getString("dateofbirth"));
+				customer.setEmail(RS.getString("email"));
+				customer.setPhone(RS.getString("phone"));
+				customer.setImageUrl(RS.getString("imageurl"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -144,7 +138,7 @@ public class ItemService {
 //				e.printStackTrace();
 			}
 		}
-		return item;
+		return customer;
 	}
 //		*********************************************************************************************************
 //		POST SERVICES *******************************************************************************************
@@ -152,28 +146,25 @@ public class ItemService {
 		@POST
 		@Produces(MediaType.APPLICATION_JSON) //Method returns object as a JSON string
 		@Consumes("application/x-www-form-urlencoded") //Method can receive POSTed data from a html form
-		@Path("/additem")
-		public Item addFormItem(
-				@FormParam("categoryid") int categoryid,
-				@FormParam("customerid") int customerid,
-				@FormParam("title") String title, 
-				@FormParam("price") float price,
-				@FormParam("image") String image,
-				@FormParam("description") String description,
-				@FormParam("condition") String condition,
-				@FormParam("location") String location){
-			System.out.println("public Item addFormItem(");
-			Item item=new Item();
-			item.setCategoryId(categoryid);
-			item.setCustomerId(customerid);
-			item.setTitle(title);
-			item.setPrice(price);
-			item.setDescription(description);
-			item.setImage(image);
-			item.setCondition(condition);
-			item.setLocation(location);
-						
-			String sql="INSERT INTO item (categoryId, customerId, title, price, description, image, `condition`, location) VALUES(?,?,?,?,?,?,?,?)";
+		@Path("/addcustomer")
+		public Customer addCustomerByPost(
+				@FormParam("id") String id, 
+				@FormParam("name") String name, 
+				@FormParam("family") String family,
+				@FormParam("dateofbirth") String dateOfBirth, 
+				@FormParam("email") String email, 
+				@FormParam("phone") String phone, 
+				@FormParam("imageurl") String imageUrl) {
+			Customer customer=new Customer();
+			customer.setId(id);
+			customer.setName(name);
+			customer.setFamily(family);
+			customer.setDateOfBirth(dateOfBirth);
+			customer.setEmail(email);
+			customer.setPhone(phone);
+			customer.setImageUrl(imageUrl);
+			
+			String sql="INSERT INTO customer (id, name , family, dateofbirth, email, phone, imageurl)  VALUES(?,?,?,?,?,?,?)";
 			
 			Connection conn=null;
 			try {
@@ -190,14 +181,13 @@ public class ItemService {
 			PreparedStatement pstmt;
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, item.getCategoryId());
-				pstmt.setInt(2, item.getCustomerId());
-				pstmt.setString(3, item.getTitle());
-				pstmt.setFloat(4,  item.getPrice());
-				pstmt.setString(5, item.getDescription());
-				pstmt.setString(6, item.getImage());
-				pstmt.setString(7, item.getCondition());
-				pstmt.setNString(8, item.getLocation());
+				pstmt.setString(1, id);				
+				pstmt.setString(2, name);
+				pstmt.setString(3, family);
+				pstmt.setString(4, dateOfBirth);
+				pstmt.setString(5, email);
+				pstmt.setString(6, phone);
+				pstmt.setString(7, imageUrl);
 				pstmt.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -211,24 +201,25 @@ public class ItemService {
 //					e.printStackTrace();
 				}
 			}			
-			return item;
+			return customer;
 		}
 
 		/**
-		 * @param Item item
-		 * @return item
+		 * @param Customer customer
+		 * @return customer
 		 * This method receives values from an html form which sends a POST type request.
 		 */
 		@POST
 		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
 		@Consumes(MediaType.APPLICATION_JSON)//Method receives object as a JSON string
-		@Path("/addjsonitem")
-		public Item addJsonItem(Item item) {
-			System.out.println("public Item addJsonItem(Item item) {");
-			String sql="INSERT INTO item (categoryId, customerId, title, price, description, image, `condition`, location) VALUES(?,?,?,?,?,?,?,?)";
+		@Path("/addjsoncustomer")
+		public Customer receiveJsonCustomer(Customer customer) {
+			System.out.println("public Customer receiveJsonCustomer(Customer customer) {");
+			String sql="INSERT INTO customer (name, price, description, category) VALUES(?,?,?,?)";
+			
 			Connection conn=null;
 			try {
-			    if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {  
+			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
 			    	conn = Connections.getProductionConnection();
 			    }
 			    else {
@@ -241,14 +232,14 @@ public class ItemService {
 			PreparedStatement pstmt;
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, item.getCategoryId());
-				pstmt.setInt(2, item.getCustomerId());
-				pstmt.setString(3, item.getTitle());
-				pstmt.setFloat(4,  item.getPrice());
-				pstmt.setString(5, item.getDescription());
-				pstmt.setString(6, item.getImage());
-				pstmt.setString(7, item.getCondition());
-				pstmt.setNString(8, item.getLocation());
+				pstmt.setString(1, customer.getId());
+				pstmt.setString(2, customer.getName());
+				pstmt.setString(3, customer.getFamily());
+				pstmt.setString(4, customer.getDateOfBirth());
+				pstmt.setString(5, customer.getEmail());
+				pstmt.setString(6, customer.getPhone());
+				pstmt.setString(7, customer.getImageUrl());
+
 				pstmt.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -263,8 +254,8 @@ public class ItemService {
 				}
 			}
 			
-			item.setTitle(item.getTitle());
-			return item;
+			customer.setName(customer.getName());
+			return customer;
 		}
 		
 //		*********************************************************************************************************
@@ -273,24 +264,28 @@ public class ItemService {
 		@PUT
 		@Consumes(MediaType.APPLICATION_JSON) //Method takes object as a JSON string
 		@Produces(MediaType.APPLICATION_JSON)
-		@Path("/updatejsonitem")
-		public Item updateJsonItem(Item item) {
-			System.out.println("public Item updateItem(Item item) {");
-			System.out.println("item => " + item);
-			System.out.println("item.getImage() = " + item.getImage());
-	
-			String sql = "UPDATE item SET "
-					/*1*/ + "categoryId = ?, "
-					/*2*/ + "customerId = ?, "
-					/*3*/ + "title = ?, "
-					/*4*/ + "price = ?, "
-					/*5*/ + "description = ?, "
-					/*6*/ + "image = ?, "
-					/*7*/ + "`condition` = ?, "
-					/*8*/ + "location = ? "
-					/*9*/ + "WHERE itemId = ?;"; // datePosted (Timestamp) will be updated by MySQL		
-			System.out.println("sql => " + sql);		
-
+		@Path("/updatejsoncustomer")
+		public Customer updateCustomer(Customer customer) {
+			System.out.println("public Customer updateCustomer(Customer customer) {");
+			System.out.println("customer => " + customer);
+			
+			String sql = "UPDATE customer SET "
+					+ "name = ?, "
+					+ "family = ?, "
+					+ "dateofbirth = ?, "
+					+ "email = ?, "
+					+ "phone = ? "
+					+ "imageurl = ? "
+					+ "WHERE id = ?;";
+			
+			System.out.println("sql => " + sql);
+			/*
+				#1 name = ? 
+				#2 price = ?
+				#3 description = ?
+				#4 category = ? 
+				#5 id = ?;
+			*/
 			Connection conn = null;
 			try {
 			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
@@ -299,24 +294,20 @@ public class ItemService {
 			    else {
 			    	conn = Connections.getDevConnection();
 			    }
-			    System.out.println("Connection: " + conn);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				System.out.println("No conn!");
 				e.printStackTrace();
 			}
 			PreparedStatement pstmt;
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, item.getCategoryId());
-				pstmt.setInt(2, item.getCustomerId());
-				pstmt.setString(3, item.getTitle());
-				pstmt.setFloat(4, item.getPrice());
-				pstmt.setString(5, item.getDescription());
-				pstmt.setString(6, item.getImage().toString());
-				pstmt.setString(7, item.getCondition());
-				pstmt.setString(8, item.getLocation());
-				pstmt.setInt(9, item.getItemId());
+				pstmt.setString(1, customer.getName());
+				pstmt.setString(2, customer.getFamily());
+				pstmt.setString(3, customer.getDateOfBirth());
+				pstmt.setString(4, customer.getEmail());
+				pstmt.setString(5, customer.getPhone());
+				pstmt.setString(6, customer.getImageUrl());
+				pstmt.setString(7, customer.getId());
 				pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -330,7 +321,7 @@ public class ItemService {
 					e.printStackTrace();
 				}
 			}
-			return item;
+			return customer;
 		}
 		
 //		*********************************************************************************************************
@@ -339,17 +330,17 @@ public class ItemService {
 		/**
 		 * @param id
 		 * void
-		 * This method deletes an item from then database based on the id number, which is received as a PathParam
+		 * This method deletes an customer from then database based on the id number, which is received as a PathParam
 		 */
 //		@GET
 		@DELETE
-		@Path("/deleteitem/{id}")
+		@Path("/deletecustomer/{id}")
 //		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
 //		@Consumes(MediaType.APPLICATION_JSON)//Method receives object as a JSON string
-		public boolean deleteItem(@PathParam("id") int id) {
-			System.out.println("public void deleteItem(@PathParam(\"id\") int id) {");
+		public boolean deleteCustomer(@PathParam("id") int id) {
+			System.out.println("public void deleteCustomer(@PathParam(\"id\") int id) {");
 			boolean removed = false; //Will be returned at the end -> feedback
-			String sql="DELETE FROM item WHERE itemId=?";
+			String sql="DELETE FROM customer WHERE id=?";
 			Connection conn=null;
 			try {
 			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
@@ -362,7 +353,7 @@ public class ItemService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// Delete item
+			// Delete customer
 			PreparedStatement pstmt;
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -389,13 +380,13 @@ public class ItemService {
 		}
 		
 		@DELETE
-		@Path("/deletejsonitem")
+		@Path("/deletejsoncustomer")
 		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
 		@Consumes(MediaType.APPLICATION_JSON)//Method receives object as a JSON string
-		public boolean deleteJsonItem(Item item) {
-			System.out.println("public void deleteJsonItem(Item item) {");
+		public boolean deleteJsonCustomer(Customer customer) {
+			System.out.println("public void deleteJsonCustomer(Customer customer) {");
 			boolean removed = false; //Will be returned at the end -> feedback
-			String sql="DELETE FROM item WHERE itemId=?";			
+			String sql="DELETE FROM customer WHERE id=?";			
 			Connection conn=null;
 			try {
 			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
@@ -411,12 +402,11 @@ public class ItemService {
 			PreparedStatement pstmt;
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, item.getItemId());
+				pstmt.setString(1, customer.getId());
 				pstmt.execute();
 				// Verifying Removal
 				if (pstmt.getUpdateCount() == 1) { // Return the affected number of rows
 					removed = true;
-					System.out.println("successfully deleted");
 				}
 				System.out.println("pstmt.getUpdateCount() = " + pstmt.getUpdateCount());
 			} catch (SQLException e) {
