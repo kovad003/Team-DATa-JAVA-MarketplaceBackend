@@ -9,7 +9,7 @@
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     <property name="drivername" value="com.mysql.jdbc.Driver"/>
     <property name="username" value="root"/>
-    <property name="password" value="Hh4497"/>
+    <property name="password" value=""/>
     <property name="localusername" value="nobody"/>
     <property name="localpassword" value="kukucs"/>
     <property name="databasename" value="webshopdb"/>
