@@ -65,6 +65,7 @@ public class CustomerService {
 				customer.setId(RS.getString("id"));
 				customer.setName(RS.getString("name"));
 				customer.setFamily(RS.getString("family"));
+				customer.setUserName(RS.getString("username"));
 				customer.setDateOfBirth(RS.getString("dateofbirth"));
 				customer.setEmail(RS.getString("email"));
 				customer.setPhone(RS.getString("phone"));
@@ -121,6 +122,7 @@ public class CustomerService {
 				customer.setId(RS.getString("id"));
 				customer.setName(RS.getString("name"));
 				customer.setFamily(RS.getString("family"));
+				customer.setUserName(RS.getString("username"));
 				customer.setDateOfBirth(RS.getString("dateofbirth"));
 				customer.setEmail(RS.getString("email"));
 				customer.setPhone(RS.getString("phone"));
@@ -151,6 +153,7 @@ public class CustomerService {
 				@FormParam("id") String id, 
 				@FormParam("name") String name, 
 				@FormParam("family") String family,
+				@FormParam("username") String userName,
 				@FormParam("dateofbirth") String dateOfBirth, 
 				@FormParam("email") String email, 
 				@FormParam("phone") String phone, 
@@ -164,7 +167,7 @@ public class CustomerService {
 			customer.setPhone(phone);
 			customer.setImageUrl(imageUrl);
 			
-			String sql="INSERT INTO customer (id, name , family, dateofbirth, email, phone, imageurl)  VALUES(?,?,?,?,?,?,?)";
+			String sql="INSERT INTO customer (id, name , family, username, dateofbirth, email, phone, imageurl)  VALUES(?,?,?,?,?,?,?,?)";
 			
 			Connection conn=null;
 			try {
@@ -184,10 +187,11 @@ public class CustomerService {
 				pstmt.setString(1, id);				
 				pstmt.setString(2, name);
 				pstmt.setString(3, family);
-				pstmt.setString(4, dateOfBirth);
-				pstmt.setString(5, email);
-				pstmt.setString(6, phone);
-				pstmt.setString(7, imageUrl);
+				pstmt.setString(4, userName);
+				pstmt.setString(5, dateOfBirth);
+				pstmt.setString(6, email);
+				pstmt.setString(7, phone);
+				pstmt.setString(8, imageUrl);
 				pstmt.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -215,7 +219,7 @@ public class CustomerService {
 		@Path("/addjsoncustomer")
 		public Customer receiveJsonCustomer(Customer customer) {
 			System.out.println("public Customer receiveJsonCustomer(Customer customer) {");
-			String sql="INSERT INTO customer (name, price, description, category) VALUES(?,?,?,?)";
+			String sql="INSERT INTO customer (id, name , family, username, dateofbirth, email, phone, imageurl)  VALUES(?,?,?,?,?,?,?,?)";
 			
 			Connection conn=null;
 			try {
@@ -235,10 +239,11 @@ public class CustomerService {
 				pstmt.setString(1, customer.getId());
 				pstmt.setString(2, customer.getName());
 				pstmt.setString(3, customer.getFamily());
-				pstmt.setString(4, customer.getDateOfBirth());
-				pstmt.setString(5, customer.getEmail());
-				pstmt.setString(6, customer.getPhone());
-				pstmt.setString(7, customer.getImageUrl());
+				pstmt.setString(4, customer.getUserName());
+				pstmt.setString(5, customer.getDateOfBirth());
+				pstmt.setString(6, customer.getEmail());
+				pstmt.setString(7, customer.getPhone());
+				pstmt.setString(8, customer.getImageUrl());
 
 				pstmt.execute();
 			} catch (SQLException e) {
@@ -272,6 +277,7 @@ public class CustomerService {
 			String sql = "UPDATE customer SET "
 					+ "name = ?, "
 					+ "family = ?, "
+					+ "username = ?, "
 					+ "dateofbirth = ?, "
 					+ "email = ?, "
 					+ "phone = ? "
@@ -303,11 +309,12 @@ public class CustomerService {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, customer.getName());
 				pstmt.setString(2, customer.getFamily());
-				pstmt.setString(3, customer.getDateOfBirth());
-				pstmt.setString(4, customer.getEmail());
-				pstmt.setString(5, customer.getPhone());
-				pstmt.setString(6, customer.getImageUrl());
-				pstmt.setString(7, customer.getId());
+				pstmt.setString(3, customer.getUserName());
+				pstmt.setString(4, customer.getDateOfBirth());
+				pstmt.setString(5, customer.getEmail());
+				pstmt.setString(6, customer.getPhone());
+				pstmt.setString(7, customer.getImageUrl());
+				pstmt.setString(8, customer.getId());
 				pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
