@@ -3,28 +3,28 @@ package data;
 
 public class Customer {
 
-	private String id;
-	private String name;
-	private String family;
+	private int customerId;
+	private String firstName;
+	private String lastName;
 	private String userName;
 	private String password;	
 	private String dateOfBirth ;
 	private String email;
 	private String phone;
-	private String imageUrl;
+	private String image;
 	
 	// constructor
-	public Customer(String id, String name, String family,  String userName,  String password, String dateOfBirth,  String email,String phone, String imageUrl) {
+	public Customer(int customerId, String firstName, String lastName,  String userName,  String password, String dateOfBirth,  String email,String phone, String image) {
 		super();
-		this.id = id;
-		this.name = name;
-		this.family = family;
+		this.customerId = customerId;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.userName = userName;
 		this.password = password;
 		this.dateOfBirth = dateOfBirth;
 		this.email = email;
 		this.phone = phone;
-		this.imageUrl = imageUrl;
+		this.image = image;
 	}
 
 
@@ -32,28 +32,29 @@ public class Customer {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getId() {
-		return id;
+	public int getCustomerId() {
+		return customerId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 
-	public String getName() {
-		return name;
+
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getFamily() {
-		return family;
+	public String getLastFamily() {
+		return lastName;
 	}
 
-	public void setFamily(String family) {
-		this.family = family;
+	public void setLastFamily(String lastName) {
+		this.lastName = lastName;
 	}
 	public String getUserName() {
 		return userName;
@@ -96,12 +97,12 @@ public class Customer {
 		this.phone = phone;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public String getImage() {
+		return image;
 	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 
