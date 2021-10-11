@@ -66,16 +66,17 @@ id varchar(25) NOT NULL,
 name varchar(50) NOT NULL,
 family varchar(50) NOT NULL,
 username varchar(50) NOT NULL,
+`password` varchar(50),
 dateofbirth varchar(25) ,
 email varchar(100) NOT NULL,
 phone varchar(25),
 imageurl varchar(200)
 );
 
-INSERT INTO customer (id, name , family, username, dateofbirth, email, phone, imageurl) VALUES
-('p001', 'Frank', 'Larson', 'flarson', '20.03.1989', 'f.larson@gmail.com', '0403771254', "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80"),
-('p004', 'Jacki', 'Fitcher', 'jackyfi' , '12.05.1992', 'jacki.fitcher@gmail.com', '0402875145', "https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80"),
-('p005', 'Sara', 'Peterson', 'speterson', '10.08.1996', 's.peterson@gmail.com', '0467568412', "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=895&q=80");
+INSERT INTO customer (id, name , family, username, `password` , dateofbirth, email, phone, imageurl) VALUES
+('p001', 'Frank', 'Larson', 'flarson', '', '20.03.1989', 'f.larson@gmail.com', '0403771254', "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80"),
+('p004', 'Jacki', 'Fitcher', 'jackyfi' , '', '12.05.1992', 'jacki.fitcher@gmail.com', '0402875145', "https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80"),
+('p005', 'Sara', 'Peterson', 'speterson', '', '10.08.1996', 's.peterson@gmail.com', '0467568412', "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=895&q=80");
 
 select * from customer;
 
@@ -167,8 +168,6 @@ INSERT INTO item (categoryId, customerId, title, price, description, `condition`
  "https://images.unsplash.com/photo-1503650923300-dd2f6a007eaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80");
 
 select * from item;
-
-
 
 
 
