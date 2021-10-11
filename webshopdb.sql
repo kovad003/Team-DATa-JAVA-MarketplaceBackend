@@ -72,17 +72,17 @@ CREATE TABLE item (
 itemId INTEGER NOT NULL auto_increment,
 categoryId INTEGER NOT NULL,
 customerId INTEGER NOT NULL,
-title varchar(25) NOT NULL,
+title varchar(55) NOT NULL,
 price decimal(10,2) NOT NULL,
-description varchar(75) NOT NULL,
+description varchar(500) NOT NULL,
 image varchar(255) NOT NULL,
 `condition` varchar(25) NOT NULL,
-location varchar (55) NOT NULL,
+location varchar (255) NOT NULL,
 datePosted timestamp,
 PRIMARY KEY (itemId)
 );
 
-INSERT INTO item (categoryId, customerId, title, price, description, image, `condition`, location) VALUES
+INSERT INTO item (categoryId, customerId, title, price, description, `condition`, location, image) VALUES
 (1, 1001, "Dell notebook", 150,
 "I have just bought a desktop PC so I do not need this any longer.", 
 "used", "Hameenlinna",
