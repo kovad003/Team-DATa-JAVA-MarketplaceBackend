@@ -97,7 +97,7 @@ public class CustomerService {
 	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
-	@Path("/getcustomer/{id}")
+	@Path("/getcustomer/{customerId}")
 	public Customer getCustomer(@PathParam("customerId") int customerId) {
 		String sql = "SELECT * FROM customer WHERE customerId = ?;";
 		Customer customer = new Customer();
@@ -160,7 +160,7 @@ public class CustomerService {
 				@FormParam("dateOfBirth") String dateOfBirth, 
 				@FormParam("email") String email, 
 				@FormParam("phone") String phone, 
-				@FormParam("imageurl") String image) {
+				@FormParam("image") String image) {
 			Customer customer=new Customer();
 			customer.setCustomerId(customerId);
 			customer.setFirstName(firstName);
@@ -172,7 +172,7 @@ public class CustomerService {
 			customer.setPhone(phone);
 			customer.setImage(image);
 			
-			String sql="INSERT INTO customer (id, name , family, username, password, dateofbirth, email, phone, imageurl)  VALUES(?,?, ?,?,?,?,?,?,?)";
+			String sql="INSERT INTO customer (customerId, firstName , lastName, userName, password, dateOfBirth, email, phone, image)  VALUES(?,?, ?,?,?,?,?,?,?)";
 			
 			Connection conn=null;
 			try {
