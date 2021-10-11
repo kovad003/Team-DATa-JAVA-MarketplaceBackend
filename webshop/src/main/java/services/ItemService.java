@@ -146,6 +146,79 @@ public class ItemService {
 		}
 		return item;
 	}
+	
+	
+	
+// HH - create a service for selecting items with same category*************************start
+
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getItemsincategory/{categoryId}")
+	public ArrayList<Item> getItemInCat(@PathParam("categoryId") int categoryId) {
+		System.out.println("public ArrayList<Item> getAllItem() {");
+		String sql = "SELECT * FROM item WHERE categoryId ="+categoryId+";";
+		ResultSet RS = null;
+		ArrayList<Item> list = new ArrayList<>();
+		Connection conn = null;
+		try {
+		    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
+		    	conn = Connections.getProductionConnection();
+		    }
+		    else {
+		    	conn = Connections.getDevConnection();
+		    }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			RS=stmt.executeQuery(sql);
+			while (RS.next()) {
+				Item item = new Item();
+				item.setItemId(RS.getInt("itemId"));
+				item.setCategoryId(RS.getInt("categoryId"));
+				item.setCustomerId(RS.getInt("customerId"));
+				item.setTitle(RS.getString("title"));
+				item.setPrice(RS.getString("price"));
+				item.setDescription(RS.getString("description"));
+				item.setImage(RS.getString("image"));
+				item.setCondition(RS.getString("condition"));
+				item.setLocation(RS.getString("location"));
+				item.setDatePosted(RS.getTimestamp("datePosted"));
+				list.add(item);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (conn!=null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+//				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+// ********************************************************************************end
+	
+	
+	
+	
 //		*********************************************************************************************************
 //		POST SERVICES *******************************************************************************************
 //		*********************************************************************************************************
