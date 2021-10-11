@@ -64,7 +64,7 @@ public class CustomerService {
 				Customer customer = new Customer();
 				customer.setCustomerId(RS.getInt("customerId"));
 				customer.setFirstName(RS.getString("firstName"));
-				customer.setLastFamily(RS.getString("lastName"));
+				customer.setLastName(RS.getString("lastName"));
 				customer.setUserName(RS.getString("userName"));
 				customer.setPassword(RS.getString("password"));
 				customer.setDateOfBirth(RS.getString("dateOfBirth"));
@@ -122,7 +122,7 @@ public class CustomerService {
 			while (RS.next()) {
 				customer.setCustomerId(RS.getInt("customerId"));
 				customer.setFirstName(RS.getString("firstName"));
-				customer.setLastFamily(RS.getString("lastName"));
+				customer.setLastName(RS.getString("lastName"));
 				customer.setUserName(RS.getString("userName"));
 				customer.setPassword(RS.getString("password"));
 				customer.setDateOfBirth(RS.getString("dateOfBirth"));
@@ -164,7 +164,7 @@ public class CustomerService {
 			Customer customer=new Customer();
 			customer.setCustomerId(customerId);
 			customer.setFirstName(firstName);
-			customer.setLastFamily(lastName);
+			customer.setLastName(lastName);
 			customer.setUserName(userName);
 			customer.setPassword(password);
 			customer.setDateOfBirth(dateOfBirth);
@@ -244,7 +244,7 @@ public class CustomerService {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, customer.getCustomerId());
 				pstmt.setString(2, customer.getFirstName());
-				pstmt.setString(3, customer.getLastFamily());
+				pstmt.setString(3, customer.getLastName());
 				pstmt.setString(4, customer.getUserName());
 				pstmt.setString(5, customer.getPassword());
 				pstmt.setString(6, customer.getDateOfBirth());
@@ -316,7 +316,7 @@ public class CustomerService {
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, customer.getFirstName());
-				pstmt.setString(2, customer.getLastFamily());
+				pstmt.setString(2, customer.getLastName());
 				pstmt.setString(3, customer.getUserName());
 				pstmt.setString(4, customer.getPassword());
 				pstmt.setString(5, customer.getDateOfBirth());

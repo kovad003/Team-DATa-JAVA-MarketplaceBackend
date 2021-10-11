@@ -49,11 +49,11 @@ public class Customer {
 		this.firstName = firstName;
 	}
 
-	public String getLastFamily() {
+	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLastFamily(String lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 	public String getUserName() {
