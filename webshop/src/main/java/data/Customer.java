@@ -6,23 +6,28 @@ public class Customer {
 	private String id;
 	private String name;
 	private String family;
+	private String userName;
+	private String password;	
 	private String dateOfBirth ;
 	private String email;
 	private String phone;
 	private String imageUrl;
 	
 	// constructor
-	public Customer(String id, String name, String family, String dateOfBirth,  String email,String phone, String imageUrl) {
+	public Customer(String id, String name, String family,  String userName,  String password, String dateOfBirth,  String email,String phone, String imageUrl) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.family = family;
+		this.userName = userName;
+		this.password = password;
 		this.dateOfBirth = dateOfBirth;
 		this.email = email;
 		this.phone = phone;
 		this.imageUrl = imageUrl;
 	}
-	
+
+
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
@@ -50,7 +55,23 @@ public class Customer {
 	public void setFamily(String family) {
 		this.family = family;
 	}
+	public String getUserName() {
+		return userName;
+	}
 
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
