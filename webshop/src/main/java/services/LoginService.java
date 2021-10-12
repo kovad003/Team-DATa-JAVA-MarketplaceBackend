@@ -49,7 +49,7 @@ public class LoginService {
 			e.printStackTrace();
 		}
 
-        // Initialise Empty Objetcs for Data Transfer
+        // Initialise Empty Objects for Data Transfer
         String sql = "SELECT id, `password` FROM customer WHERE id = ?;"; // Define a MySQL query
         PreparedStatement pstmt; // Will deliver query to DB
 		ResultSet RS = null; // Will deliver data back to JAVA from DB
