@@ -9,20 +9,27 @@ import java.sql.Timestamp;
  */
 public class Login {
     // Attributes
-	private int id;
+	private int customerId;
+	private String userName;
 	private String password;
 
     // Getters / Setters
 	public int getUserId() {
-		return id;
+		return customerId;
 	}
-	public void setUserId(int id) {
-		this.id = id;
+	public void setUserId(int customerId) {
+		this.customerId = customerId;
 	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }
