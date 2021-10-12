@@ -62,15 +62,15 @@ public class CustomerService {
 			RS=stmt.executeQuery(sql);
 			while (RS.next()) {
 				Customer customer = new Customer();
-				customer.setId(RS.getString("id"));
-				customer.setName(RS.getString("name"));
-				customer.setFamily(RS.getString("family"));
-				customer.setUserName(RS.getString("username"));
+				customer.setCustomerId(RS.getInt("customerId"));
+				customer.setFirstName(RS.getString("firstName"));
+				customer.setLastName(RS.getString("lastName"));
+				customer.setUserName(RS.getString("userName"));
 				customer.setPassword(RS.getString("password"));
-				customer.setDateOfBirth(RS.getString("dateofbirth"));
+				customer.setDateOfBirth(RS.getString("dateOfBirth"));
 				customer.setEmail(RS.getString("email"));
 				customer.setPhone(RS.getString("phone"));
-				customer.setImageUrl(RS.getString("imageurl"));
+				customer.setImage(RS.getString("image"));
 
 				
 				list.add(customer);
@@ -97,9 +97,9 @@ public class CustomerService {
 	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
-	@Path("/getcustomer/{id}")
-	public Customer getCustomer(@PathParam("id") int id) {
-		String sql = "SELECT * FROM customer WHERE id = ?;";
+	@Path("/getcustomer/{customerId}")
+	public Customer getCustomer(@PathParam("customerId") int customerId) {
+		String sql = "SELECT * FROM customer WHERE customerId = ?;";
 		Customer customer = new Customer();
 		ResultSet RS = null;
 		Connection conn=null;
@@ -117,18 +117,18 @@ public class CustomerService {
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, id);
+			pstmt.setInt(1, customerId);
 			RS = pstmt.executeQuery();
 			while (RS.next()) {
-				customer.setId(RS.getString("id"));
-				customer.setName(RS.getString("name"));
-				customer.setFamily(RS.getString("family"));
-				customer.setUserName(RS.getString("username"));
+				customer.setCustomerId(RS.getInt("customerId"));
+				customer.setFirstName(RS.getString("firstName"));
+				customer.setLastName(RS.getString("lastName"));
+				customer.setUserName(RS.getString("userName"));
 				customer.setPassword(RS.getString("password"));
-				customer.setDateOfBirth(RS.getString("dateofbirth"));
+				customer.setDateOfBirth(RS.getString("dateOfBirth"));
 				customer.setEmail(RS.getString("email"));
 				customer.setPhone(RS.getString("phone"));
-				customer.setImageUrl(RS.getString("imageurl"));
+				customer.setImage(RS.getString("image"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -152,27 +152,27 @@ public class CustomerService {
 		@Consumes("application/x-www-form-urlencoded") //Method can receive POSTed data from a html form
 		@Path("/addcustomer")
 		public Customer addCustomerByPost(
-				@FormParam("id") String id, 
-				@FormParam("name") String name, 
-				@FormParam("family") String family,
-				@FormParam("username") String userName,
+				@FormParam("customerId") int customerId, 
+				@FormParam("firstName") String firstName, 
+				@FormParam("lastName") String lastName,
+				@FormParam("userName") String userName,
 				@FormParam("password") String password,
-				@FormParam("dateofbirth") String dateOfBirth, 
+				@FormParam("dateOfBirth") String dateOfBirth, 
 				@FormParam("email") String email, 
 				@FormParam("phone") String phone, 
-				@FormParam("imageurl") String imageUrl) {
+				@FormParam("image") String image) {
 			Customer customer=new Customer();
-			customer.setId(id);
-			customer.setName(name);
-			customer.setFamily(family);
+			customer.setCustomerId(customerId);
+			customer.setFirstName(firstName);
+			customer.setLastName(lastName);
 			customer.setUserName(userName);
 			customer.setPassword(password);
 			customer.setDateOfBirth(dateOfBirth);
 			customer.setEmail(email);
 			customer.setPhone(phone);
-			customer.setImageUrl(imageUrl);
+			customer.setImage(image);
 			
-			String sql="INSERT INTO customer (id, name , family, username, password, dateofbirth, email, phone, imageurl)  VALUES(?,?, ?,?,?,?,?,?,?)";
+			String sql="INSERT INTO customer (customerId, firstName , lastName, userName, password, dateOfBirth, email, phone, image)  VALUES(?,?, ?,?,?,?,?,?,?)";
 			
 			Connection conn=null;
 			try {
@@ -189,15 +189,15 @@ public class CustomerService {
 			PreparedStatement pstmt;
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, id);				
-				pstmt.setString(2, name);
-				pstmt.setString(3, family);
+				pstmt.setInt(1, customerId);				
+				pstmt.setString(2, firstName);
+				pstmt.setString(3, lastName);
 				pstmt.setString(4, userName);
 				pstmt.setString(5, password);
 				pstmt.setString(6, dateOfBirth);
 				pstmt.setString(7, email);
 				pstmt.setString(8, phone);
-				pstmt.setString(9, imageUrl);
+				pstmt.setString(9, image);
 				pstmt.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -242,15 +242,15 @@ public class CustomerService {
 			PreparedStatement pstmt;
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, customer.getId());
-				pstmt.setString(2, customer.getName());
-				pstmt.setString(3, customer.getFamily());
+				pstmt.setInt(1, customer.getCustomerId());
+				pstmt.setString(2, customer.getFirstName());
+				pstmt.setString(3, customer.getLastName());
 				pstmt.setString(4, customer.getUserName());
 				pstmt.setString(5, customer.getPassword());
 				pstmt.setString(6, customer.getDateOfBirth());
 				pstmt.setString(7, customer.getEmail());
 				pstmt.setString(8, customer.getPhone());
-				pstmt.setString(9, customer.getImageUrl());
+				pstmt.setString(9, customer.getImage());
 
 				pstmt.execute();
 			} catch (SQLException e) {
@@ -266,7 +266,7 @@ public class CustomerService {
 				}
 			}
 			
-			customer.setName(customer.getName());
+			customer.setFirstName(customer.getFirstName());
 			return customer;
 		}
 		
@@ -282,15 +282,15 @@ public class CustomerService {
 			System.out.println("customer => " + customer);
 			
 			String sql = "UPDATE customer SET "
-					+ "name = ?, "
-					+ "family = ?, "
-					+ "username = ?, "
+					+ "firstName = ?, "
+					+ "lastName = ?, "
+					+ "userName = ?, "
 					+ "password = ?, "
-					+ "dateofbirth = ?, "
+					+ "dateOfBirth = ?, "
 					+ "email = ?, "
 					+ "phone = ? "
-					+ "imageurl = ? "
-					+ "WHERE id = ?;";
+					+ "image = ? "
+					+ "WHERE customerId = ?;";
 			
 			System.out.println("sql => " + sql);
 			/*
@@ -315,15 +315,15 @@ public class CustomerService {
 			PreparedStatement pstmt;
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, customer.getName());
-				pstmt.setString(2, customer.getFamily());
+				pstmt.setString(1, customer.getFirstName());
+				pstmt.setString(2, customer.getLastName());
 				pstmt.setString(3, customer.getUserName());
 				pstmt.setString(4, customer.getPassword());
 				pstmt.setString(5, customer.getDateOfBirth());
 				pstmt.setString(6, customer.getEmail());
 				pstmt.setString(7, customer.getPhone());
-				pstmt.setString(8, customer.getImageUrl());
-				pstmt.setString(9, customer.getId());
+				pstmt.setString(8, customer.getImage());
+				pstmt.setInt(9, customer.getCustomerId());
 				pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -350,13 +350,13 @@ public class CustomerService {
 		 */
 //		@GET
 		@DELETE
-		@Path("/deletecustomer/{id}")
+		@Path("/deletecustomer/{customerId}")
 //		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
 //		@Consumes(MediaType.APPLICATION_JSON)//Method receives object as a JSON string
-		public boolean deleteCustomer(@PathParam("id") int id) {
-			System.out.println("public void deleteCustomer(@PathParam(\"id\") int id) {");
+		public boolean deleteCustomer(@PathParam("customerId") int customerId) {
+			System.out.println("public void deleteCustomer(@PathParam(\"customerId\") int customerId) {");
 			boolean removed = false; //Will be returned at the end -> feedback
-			String sql="DELETE FROM customer WHERE id=?";
+			String sql="DELETE FROM customer WHERE customerId=?";
 			Connection conn=null;
 			try {
 			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
@@ -373,7 +373,7 @@ public class CustomerService {
 			PreparedStatement pstmt;
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, id);
+				pstmt.setInt(1, customerId);
 				pstmt.execute();
 				// Verifying Removal
 				if (pstmt.getUpdateCount() == 1) { // Return the affected number of rows
@@ -402,7 +402,7 @@ public class CustomerService {
 		public boolean deleteJsonCustomer(Customer customer) {
 			System.out.println("public void deleteJsonCustomer(Customer customer) {");
 			boolean removed = false; //Will be returned at the end -> feedback
-			String sql="DELETE FROM customer WHERE id=?";			
+			String sql="DELETE FROM customer WHERE customerId=?";			
 			Connection conn=null;
 			try {
 			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
@@ -418,7 +418,7 @@ public class CustomerService {
 			PreparedStatement pstmt;
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, customer.getId());
+				pstmt.setInt(1, customer.getCustomerId());
 				pstmt.execute();
 				// Verifying Removal
 				if (pstmt.getUpdateCount() == 1) { // Return the affected number of rows
