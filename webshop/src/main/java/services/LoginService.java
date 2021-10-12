@@ -32,6 +32,7 @@ public class LoginService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getlogindetails/{userName}")
 	public Login getLoginDetails(@PathParam("userName") String userName) {
+
         // Debugging Message
 		System.out.println("public Login getLoginDetails() {");
         
@@ -51,9 +52,10 @@ public class LoginService {
 
         // Initialise Empty Objects for Data Transfer
         String sql = "SELECT customerId, userName, `password` FROM customer WHERE userName = ?;"; // Define a MySQL query
+
         PreparedStatement pstmt; // Will deliver query to DB
 		ResultSet RS = null; // Will deliver data back to JAVA from DB
-		Login login = new Login(); // Constructure for Login object => Will be amended with the data from DB
+		Login login = new Login(); // Constructor for Login object => Will be amended with the data from DB
 				
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -62,6 +64,7 @@ public class LoginService {
 			while (RS.next()) {
 				login.setCustomerId(RS.getInt("customerId"));
 				login.setUserName(RS.getString("userName")); // ASH: it is necessary to amend script file with 'password' at `password column`
+
 				login.setPassword(RS.getString("password")); // ASH: it is necessary to amend script file with 'password' at `password column`
 			}
 		} catch (SQLException e) {
