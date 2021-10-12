@@ -78,7 +78,7 @@ PRIMARY KEY (id)
 ('password'),
 ('password'),
 ('password');
-/*
+*/
 
 select * from customer;
 # =========================================================================================================================================
@@ -199,7 +199,6 @@ INSERT INTO region (regionId, regionName) VALUES
 (2,"Varsinais-Suomi"),
 (3,"Uusimaa"),
 (4,"Satakunta"),
-(5,"Päijät-Häme"),
 (5,"Päijät-Häme"),
 (6,"Pohjois-Savo"),
 (7,"Pohjois-Pohjanmaa"),
