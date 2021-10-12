@@ -61,7 +61,7 @@ public class LoginService {
 			RS = pstmt.executeQuery();			
 			while (RS.next()) {
 				login.setUserId(RS.getInt("id"));
-				login.setPassword(RS.getString("password")); // ASH: amend script file with 'password' at `password column`
+				login.setPassword(RS.getString("password")); // ASH: it is necessary to amend script file with 'password' at `password column`
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
