@@ -20,8 +20,8 @@ import data.Login;
  * @author Ash
  *	Data class for "customer" table with the purpose of user authentication
  */
-@Path("/loginservice")
-public class LoginService {
+@Path("/login2service")
+public class Login2UserNameService {
 //	*********************************************************************************************************
 //	GET SERVICES ********************************************************************************************
 //	*********************************************************************************************************
@@ -30,9 +30,8 @@ public class LoginService {
 	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getlogindetails/{userName}")
+	@Path("/checkusername/{userName}")
 	public Login getLoginDetails(@PathParam("userName") String userName) {
-
         // Debugging Message
 		System.out.println("public Login getLoginDetails() {");
         
@@ -51,20 +50,17 @@ public class LoginService {
 		}
 
         // Initialise Empty Objects for Data Transfer
-        String sql = "SELECT customerId, userName, `password` FROM customer WHERE userName = ?;"; // Define a MySQL query
-
+        String sql = "SELECT userName, `password` FROM customer WHERE userName = ?;"; // Define a MySQL query
         PreparedStatement pstmt; // Will deliver query to DB
 		ResultSet RS = null; // Will deliver data back to JAVA from DB
-		Login login = new Login(); // Constructor for Login object => Will be amended with the data from DB
+		Login login = new Login(); // Constructure for Login object => Will be amended with the data from DB
 				
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userName);
 			RS = pstmt.executeQuery();			
 			while (RS.next()) {
-				login.setUserId(RS.getInt("customerId"));
-				login.setUserName(RS.getString("userName")); // ASH: it is necessary to amend script file with 'password' at `password column`
-
+				login.setUserName(RS.getString("userName"));
 				login.setPassword(RS.getString("password")); // ASH: it is necessary to amend script file with 'password' at `password column`
 			}
 		} catch (SQLException e) {
