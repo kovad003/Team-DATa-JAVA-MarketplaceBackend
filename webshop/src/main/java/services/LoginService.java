@@ -60,7 +60,7 @@ public class LoginService {
 			pstmt.setString(1, userName);
 			RS = pstmt.executeQuery();			
 			while (RS.next()) {
-				login.setUserId(RS.getInt("customerId"));
+				login.setCustomerId(RS.getInt("customerId"));
 				login.setUserName(RS.getString("userName")); // ASH: it is necessary to amend script file with 'password' at `password column`
 				login.setPassword(RS.getString("password")); // ASH: it is necessary to amend script file with 'password' at `password column`
 			}

@@ -14,10 +14,10 @@ public class Login {
 	private String password;
 
     // Getters / Setters
-	public int getUserId() {
+	public int getCustomerId() {
 		return customerId;
 	}
-	public void setUserId(int customerId) {
+	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
 	public String getPassword() {
