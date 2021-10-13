@@ -125,22 +125,22 @@ INSERT INTO item (categoryId, customerId, title, price, description, `condition`
  'very new', 'Hameenlinna' ,
  "https://images.unsplash.com/photo-1576470331852-65ef7a0243a8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80"),
 
-(4, '1003' , 'Nike shoes', '48' ,
+(4, '1001' , 'Nike shoes', '48' ,
  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dignissim, lectus quis lacinia vulputate, orci mauris consectetur lectus, ut pharetra leo velit ut nisl.',
  'new', 'Hameenlinna' ,
  "https://images.unsplash.com/photo-1623684225794-a8f1f5037f5c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80"),
 
-(1, '1004' , 'Sofa', '100' ,
+(1, '1002' , 'Sofa', '100' ,
  'This sofa was bought from Sofology and is 4 years old - it is extremely comfortable and all the electrics are in full working order.There are 3 small areas on the arms and seat where the surface has worn slightly and there is an area where excessive head wear has dis-colored the leather, I tried to clean it and it went a darker colour,See pics - so we use a "Throw" to cover the top part of the sofa and it looks fine. Clean.',
  'very new', 'Hameenlinna' ,
  "https://images.unsplash.com/photo-1582582494705-f8ce0b0c24f0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=869&q=80"),
 
-(5, '1003' , 'Play station 3', '120' ,
+(5, '1001' , 'Play station 3', '120' ,
  'Aenean ut ex lacinia, consectetur quam vitae, iaculis nibh. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
  'Old',  'Lahti' ,
  "https://images.unsplash.com/photo-1526509867162-5b0c0d1b4b33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"),
 
-(7, '1004' , 'Coocking Pan', '5' ,
+(7, '1002' , 'Coocking Pan', '5' ,
  'Quisque convallis mi at sapien molestie faucibus. In velit ex, elementum vitae cursus id, interdum nec mi. Sed pellentesque risus malesuada, egestas mi pretium, porttitor risus.',
  'new',  'Hameenlinna' ,
  "https://images.unsplash.com/photo-1592156328757-ae2941276b2c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80"),
@@ -170,8 +170,14 @@ INSERT INTO item (categoryId, customerId, title, price, description, `condition`
  'old', 'Helsinki' ,
  "https://images.unsplash.com/photo-1503650923300-dd2f6a007eaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80");
 
-DESCRIBE item;
+# DESCRIBE item;
+/*
+SELECT * from item WHERE price < 100;
+SELECT * from item WHERE price > 100;
+SELECT * from item WHERE price >= 100 AND price <= 200;
+SELECT * from item WHERE price >= ? AND price <= ?;
 SELECT * from item;
+*/
 
 /* FOR JAVA
 SELECT * FROM item WHERE id = 3;
