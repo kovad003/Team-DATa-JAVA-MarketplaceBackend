@@ -13,7 +13,6 @@ public class Login {
 	private String userName;
 	private String password;
 	
-	
 	public int getCustomerId() {
 		return customerId;
 	}
