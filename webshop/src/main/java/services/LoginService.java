@@ -32,7 +32,7 @@ public class LoginService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getlogindetails/{userName}")
 	public Login getLoginDetails(@PathParam("userName") String userName) {
-
+		System.out.println("userName = " + userName);
         // Debugging Message
 		System.out.println("public Login getLoginDetails() {");
         
@@ -79,6 +79,9 @@ public class LoginService {
 				e.printStackTrace();
 			}
 		}
+		System.out.println("customerId: " + login.getCustomerId());
+		System.out.println("userName: " + login.getUserName());
+		System.out.println("password: " + login.getPassword());
 		return login;
 	}
 }
