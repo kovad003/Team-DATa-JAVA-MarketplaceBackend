@@ -41,6 +41,7 @@ public class CategoryService {
 	@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
 	@Path("/getall")
 	public ArrayList<Category> getAllCategory() {
+		System.out.println("public ArrayList<Category> getAllCategory() {");
 		String sql = "SELECT * FROM category";
 		ResultSet RS = null;
 		ArrayList<Category> list = new ArrayList<>();
@@ -82,6 +83,7 @@ public class CategoryService {
 //				e.printStackTrace();
 			}
 		}
+		System.out.println("category list: " + list);
 		return list;
 	}
 	
