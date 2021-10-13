@@ -225,7 +225,7 @@ public class CustomerService {
 		@Path("/addjsoncustomer")
 		public Customer receiveJsonCustomer(Customer customer) {
 			System.out.println("public Customer receiveJsonCustomer(Customer customer) {");
-			String sql="INSERT INTO customer (id, name , family, username, password, dateofbirth, email, phone, imageurl)  VALUES(?,?,?,?,?,?,?,?,?)";
+			String sql="INSERT INTO customer ( firstName , lastName, userName, password, dateOfBirth, email, phone, image)  VALUES(?,?,?,?,?,?,?,?)";
 			
 			Connection conn=null;
 			try {
@@ -242,15 +242,14 @@ public class CustomerService {
 			PreparedStatement pstmt;
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, customer.getCustomerId());
-				pstmt.setString(2, customer.getFirstName());
-				pstmt.setString(3, customer.getLastName());
-				pstmt.setString(4, customer.getUserName());
-				pstmt.setString(5, customer.getPassword());
-				pstmt.setString(6, customer.getDateOfBirth());
-				pstmt.setString(7, customer.getEmail());
-				pstmt.setString(8, customer.getPhone());
-				pstmt.setString(9, customer.getImage());
+				pstmt.setString(1, customer.getFirstName());
+				pstmt.setString(2, customer.getLastName());
+				pstmt.setString(3, customer.getUserName());
+				pstmt.setString(4, customer.getPassword());
+				pstmt.setString(5, customer.getDateOfBirth());
+				pstmt.setString(6, customer.getEmail());
+				pstmt.setString(7, customer.getPhone());
+				pstmt.setString(8, customer.getImage());
 
 				pstmt.execute();
 			} catch (SQLException e) {
