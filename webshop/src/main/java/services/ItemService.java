@@ -278,7 +278,7 @@ public class ItemService {
 	}
 	
 	
-	// HH - create a service for  get all the items for Specific customer
+	// ASH - create a service for  get all the items for Specific customer
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getcustomeritems/{customerId}")
