@@ -170,13 +170,14 @@ INSERT INTO item (categoryId, customerId, title, price, description, `condition`
  'old', 'Helsinki' ,
  "https://images.unsplash.com/photo-1503650923300-dd2f6a007eaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80");
 
+SELECT * from item;
 # DESCRIBE item;
 /*
 SELECT * from item WHERE price < 100;
 SELECT * from item WHERE price > 100;
 SELECT * from item WHERE price >= 100 AND price <= 200;
 SELECT * from item WHERE price >= ? AND price <= ?;
-SELECT * from item;
+
 */
 
 /* FOR JAVA
