@@ -91,6 +91,76 @@ public class ItemService {
 	
 	
 	/**
+	 * @return list of ArrayList<Item> type
+	 */
+	// Get all items in descending order so the last added item is come the top of the List
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getalldesc")
+	public ArrayList<Item> getAllItemDesc() {
+		System.out.println("public ArrayList<Item> getAllItem() {");
+		String sql = "SELECT * FROM item ORDER BY itemId DESC;";
+		ResultSet RS = null;
+		ArrayList<Item> list = new ArrayList<>();
+		Connection conn = null;
+		try {
+		    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
+		    	conn = Connections.getProductionConnection();
+		    }
+		    else {
+		    	conn = Connections.getDevConnection();
+		    }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			RS=stmt.executeQuery(sql);
+			while (RS.next()) {
+				Item item = new Item();
+				item.setItemId(RS.getInt("itemId"));
+				item.setCategoryId(RS.getInt("categoryId"));
+				item.setCustomerId(RS.getInt("customerId"));
+				item.setTitle(RS.getString("title"));
+				item.setPrice(RS.getString("price"));
+				item.setDescription(RS.getString("description"));
+				item.setImage(RS.getString("image"));
+				item.setCondition(RS.getString("condition"));
+				item.setLocation(RS.getString("location"));
+				item.setDatePosted(RS.getTimestamp("datePosted"));
+				list.add(item);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (conn!=null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+//				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
 	 * @param id
 	 * @return Item item
 	 * This method receives a PathParam called id, which is used to fetch specific data from the database
@@ -206,6 +276,59 @@ public class ItemService {
 	}
 	
 	
+	// HH - create a service for  get all the items for Specific customer
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getcustomeritems/{customerId}")
+	public ArrayList<Item> getCustomerItems(@PathParam("customerId") int customerId) {
+		System.out.println("public ArrayList<Item> getAllItem() {");
+		String sql = "SELECT * FROM item WHERE customerId ="+customerId+";";
+		ResultSet RS = null;
+		ArrayList<Item> list = new ArrayList<>();
+		Connection conn = null;
+		try {
+		    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
+		    	conn = Connections.getProductionConnection();
+		    }
+		    else {
+		    	conn = Connections.getDevConnection();
+		    }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			RS=stmt.executeQuery(sql);
+			while (RS.next()) {
+				Item item = new Item();
+				item.setItemId(RS.getInt("itemId"));
+				item.setCategoryId(RS.getInt("categoryId"));
+				item.setCustomerId(RS.getInt("customerId"));
+				item.setTitle(RS.getString("title"));
+				item.setPrice(RS.getString("price"));
+				item.setDescription(RS.getString("description"));
+				item.setImage(RS.getString("image"));
+				item.setCondition(RS.getString("condition"));
+				item.setLocation(RS.getString("location"));
+				item.setDatePosted(RS.getTimestamp("datePosted"));
+				list.add(item);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (conn!=null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+//				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 
 	
 	
