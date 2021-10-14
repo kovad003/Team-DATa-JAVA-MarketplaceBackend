@@ -241,6 +241,7 @@ public class CustomerService {
 			}
 			PreparedStatement pstmt;
 			try {
+				/* Prepared statements */
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, customer.getFirstName());
 				pstmt.setString(2, customer.getLastName());
