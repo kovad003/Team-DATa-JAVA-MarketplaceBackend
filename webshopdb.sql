@@ -168,7 +168,17 @@ INSERT INTO item (categoryId, customerId, title, price, description, `condition`
 (3, '1002' , 'Volkswagen', '980' ,
  'Donec congue neque lacus, id finibus libero commodo id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean laoreet interdum arcu, vitae sodales augue bibendum quis. Sed rhoncus arcu ex, ut luctus velit posuere a. Morbi in nibh metus.',
  'old', 'Helsinki' ,
- "https://images.unsplash.com/photo-1503650923300-dd2f6a007eaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80");
+ "https://images.unsplash.com/photo-1503650923300-dd2f6a007eaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80"),
+
+(1, '1002' , 'Sofa', '195' ,
+ 'Sed at erat molestie, efficitur mi id, vehicula augue. Vestibulum non libero ac mi condimentum venenatis et a arcu. Donec malesuada elementum condimentum. Etiam leo diam, viverra vitae leo id, auctor suscipit enim.',
+ 'new', 'Helsinki' ,
+ "https://images.unsplash.com/photo-1605774337664-7a846e9cdf17?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80"),
+
+(1, '1000' , 'Sofa', '215' ,
+ 'Praesent ut nisi non arcu sodales cursus eget ut nunc. Donec vulputate, lorem faucibus porttitor lacinia, massa diam hendrerit metus, sed pharetra leo velit consequat massa. Donec malesuada elementum condimentum. Etiam leo diam, viverra vitae leo id, auctor suscipit enim.',
+ 'new', 'Helsinki' ,
+ "https://images.unsplash.com/photo-1605774337664-7a846e9cdf17?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80");
 
 # DESCRIBE item;
 /*
@@ -193,7 +203,11 @@ SELECT ROW_COUNT(); #Checks deleted rows
 INSERT INTO item (categoryId, customerId, title, price, description, image, `condition`) VALUES
 (3,3,"dd", 4,"d","d","d");
 UPDATE item SET categoryId = 111, customerId = 111, title = "newtitle", price = 111, description = "new descr", image = "https://images.wallpapersden.com/image/wxl-steven-seagal-brunette-face_53269.jpg", `condition` = "updated condition" WHERE itemId = 1;
+SELECT * FROM item LEFT JOIN category ON category.id = item.categoryId
+WHERE item.price >= 1 AND item.price <= 500 AND item.title = 'Sofa' AND `condition` = 'new' AND category.title = 'Furnitures' AND location = 'Helsinki';
 */
+
+
 # ============================================================================================================================================
 # REGION TABLE ===============================================================================================================================
 CREATE TABLE region( # let's keep it as manual value(no auto_incr.)
