@@ -2,9 +2,11 @@ package data;
 
 import java.sql.Timestamp;
 
+
 /**
- * @author Dan
- *	Data class for "item" table
+ * @author ashley
+ * 		This file is the data class for the item table
+ *		File includes setters and getters.
  */
 public class Item {
 	private int itemId;
