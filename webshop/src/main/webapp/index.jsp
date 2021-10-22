@@ -108,6 +108,36 @@
 	    	xmlhttp.send(x); // Sending the JSON to the service
 	    	alert('item x = ' + x);
 	    }
+	    
+	    function sendSearchData(itemform){
+	    	alert('sendSearchData()'); // if no alert pops up that means a bug in the JS code
+	    	var item = new Object();
+	    	/* *******************************************************************
+	    		item.property -> has to be the same as in the data/object class!!!
+	    	*********************************************************************/
+	    	item.categoryTitle = itemform.categorytitle.value;
+	    	item.minPrice = itemform.minprice.value;
+	    	item.maxPrice = itemform.maxprice.value;	
+	    	item.itemTitle = itemform.itemtitle.value;
+	    	item.condition = itemform.condition.value;
+	    	item.location = itemform.location.value;
+	    	
+	    	var x=JSON.stringify(item);
+	    	
+	    	xmlhttp = new XMLHttpRequest();
+	    	xmlhttp.onreadystatechange = function() {
+	    	//alert('this.readyState = ' + this.readyState);
+	    	//alert('this.status = ' + this.status);
+	    	  if (this.readyState == 4 && this.status == 200) {
+	    		  	alert('OK: ' + 'this.readyState == 4 && this.status == 200');
+					document.getElementById("search_result").innerHTML = this.responseText; // Will grab the HTML element identified by the result ID and prints the response there
+	    	  }
+	    	};
+	    	xmlhttp.open("POST", "./rest/searchservice/searchforitems", true);
+	    	xmlhttp.setRequestHeader("Content-type", "application/json");	
+	    	xmlhttp.send(x); // Sending the JSON to the service
+	    	alert('item x = ' + x);
+	    }
 
     </script>
   </head>
@@ -187,6 +217,20 @@ The result comes here
 	</form>
 <p id='delete_result'>
 result: true or false
+</p>
+
+<h2>ADD JSON String (JSON -> JSON)</h2>
+	<form id ='formJSON'action='./rest/searchservice/searchForItem' method='post'>
+	CategoryTitle: <input type='text' name='categorytitle' value='Furnitures'><br>
+	ItemTitle: <input type='text' name='itemtitle' value='Sofa'><br>
+	MinPrice: <input type='text' name='minprice' value='1'><br>
+	MaxPrice: <input type='text' name='maxprice' value='500'><br>
+	Condition: <input type='text' name='condition' value='new'><br>
+	Location: <input type='text' name='location' value='Helsinki'><br>
+	<input type='button' name='ok' value='OK' onclick="sendSearchData(this.form)" ><br>
+	</form>
+<p id='search_result'>
+The result comes here
 </p>
 	
   </body>

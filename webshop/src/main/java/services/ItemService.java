@@ -45,10 +45,12 @@ public class ItemService {
 		ResultSet RS = null;
 		ArrayList<Item> list = new ArrayList<>();
 		Connection conn = null;
+		/* AD - Checking for the cloud connection first */
 		try {
 		    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
 		    	conn = Connections.getProductionConnection();
 		    }
+		    /* AD - And it goes with the local connection as the backup */
 		    else {
 		    	conn = Connections.getDevConnection();
 		    }
@@ -276,7 +278,7 @@ public class ItemService {
 	}
 	
 	
-	// HH - create a service for  get all the items for Specific customer
+	// ASH - create a service for  get all the items for Specific customer
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getcustomeritems/{customerId}")
