@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 public class Item {
 	private int itemId;
 	private int categoryId;
+	private String categoryTitle; // For joint table (item + category)
 	private int customerId;
 	private String title;
 	private float price;
@@ -37,6 +38,12 @@ public class Item {
 	}
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
+	}
+	public String getCategoryTitle() {
+		return categoryTitle;
+	}
+	public void setCategoryTitle(String categoryTitle) {
+		this.categoryTitle = categoryTitle;
 	}
 	public String getTitle() {
 		return title;

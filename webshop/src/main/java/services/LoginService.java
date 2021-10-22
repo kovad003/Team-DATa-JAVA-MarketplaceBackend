@@ -20,7 +20,7 @@ import conn.Connections;
 import data.Login;
 
 /**
- * @author Ash
+ * @author Dan
  *	Data class for "customer" table with the purpose of user authentication
  */
 @Path("/loginservice")
