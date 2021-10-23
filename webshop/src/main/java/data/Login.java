@@ -4,7 +4,7 @@ package data;
 import java.sql.Timestamp;
 
 /**
- * @author Dan
+ * @author Dan and Tukhtaboy
  *	Data class for "customer" table with the purpose of user authentication
  */
 public class Login {

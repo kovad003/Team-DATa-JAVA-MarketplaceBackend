@@ -25,7 +25,7 @@ import java.sql.Statement;
 import conn.Connections;
 import data.Customer;
 /**
- * @author Dan and Ash
+ * @author Hossein and Ash
  *	This class contains all the service related to the customer table.
  */
 @Path("/customerservice")
