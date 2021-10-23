@@ -15,7 +15,7 @@
     <property name="databasename" value="webshopdb"/>
     <property name="sockectfactory" value="com.google.cloud.sql.mysql.SocketFactory"/>
 <!--    <property name="cloudsqlinstance" value="fishlist-287507:europe-west1:fishlistmysql" /> --> 
-    <property name="cloudsqlinstance" value="mobilelist:europe-west3:mobilelistmysql" />
+    <property name="cloudsqlinstance" value="useddo-project:europe-central2:useddo-project-database" />
     
     
   </system-properties>
