@@ -25,7 +25,7 @@ import java.sql.Statement;
 import conn.Connections;
 import data.Customer;
 /**
- * @author Dan
+ * @author Hossein and Ash
  *	This class contains all the service related to the customer table.
  */
 @Path("/customerservice")
@@ -228,10 +228,13 @@ public class CustomerService {
 			String sql="INSERT INTO customer ( firstName , lastName, userName, password, dateOfBirth, email, phone, image)  VALUES(?,?,?,?,?,?,?,?)";
 			
 			Connection conn=null;
+			/* AD - Checking for the cloud connection first */
 			try {
 			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
 			    	conn = Connections.getProductionConnection();
 			    }
+			    /* AD - the local connection is used as backup, should the Google Cloud Platform 
+			    connection not be successful */
 			    else {
 			    	conn = Connections.getDevConnection();
 			    }
@@ -241,7 +244,7 @@ public class CustomerService {
 			}
 			PreparedStatement pstmt;
 			try {
-				/* Prepared statements */
+				/* AD - Prepared statements */
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, customer.getFirstName());
 				pstmt.setString(2, customer.getLastName());
@@ -265,7 +268,7 @@ public class CustomerService {
 //					e.printStackTrace();
 				}
 			}
-			
+			/* AD - Customer successfully added */
 			customer.setFirstName(customer.getFirstName());
 			return customer;
 		}

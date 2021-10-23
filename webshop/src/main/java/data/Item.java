@@ -4,10 +4,13 @@ import java.sql.Timestamp;
 
 
 /**
- * @author ashley
+ * @author Dan and Ash
  * 		This file is the data class for the item table
  *		File includes setters and getters.
  */
+
+/* AD - Class Properties */
+
 public class Item {
 	private int itemId;
 	private int categoryId;
@@ -20,6 +23,8 @@ public class Item {
 	private String condition;
 	private String location;
 	private Timestamp datePosted;
+	
+	/* AD - Setters and Getters */
 	
 	public int getItemId() {
 		return itemId;

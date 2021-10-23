@@ -24,7 +24,7 @@ import java.sql.Statement;
 import conn.Connections;
 import data.Item;
 /**
- * @author Dan
+ * @author Dan (and Ash)
  *	This class contains all the service related to the item table.
  */
 @Path("/itemservice")
@@ -50,7 +50,8 @@ public class ItemService {
 		    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
 		    	conn = Connections.getProductionConnection();
 		    }
-		    /* AD - And it goes with the local connection as the backup */
+		    /* AD - the local connection is used as backup, should the Google Cloud Platform
+		     * 		connection not be successful */
 		    else {
 		    	conn = Connections.getDevConnection();
 		    }
@@ -222,7 +223,6 @@ public class ItemService {
 	
 	
 // HH - create a service for selecting items with same category*************************start
-
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -278,7 +278,7 @@ public class ItemService {
 	}
 	
 	
-	// ASH - create a service for  get all the items for Specific customer
+	// ASH - creates a service for getting all of the items for a specific customer
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getcustomeritems/{customerId}")
@@ -288,10 +288,13 @@ public class ItemService {
 		ResultSet RS = null;
 		ArrayList<Item> list = new ArrayList<>();
 		Connection conn = null;
+		/* AD - Checking for the cloud connection first */
 		try {
 		    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
 		    	conn = Connections.getProductionConnection();
 		    }
+		    /* AD - the local connection is used as backup, should the Google Cloud Platform
+		     * 		connection not be successful */
 		    else {
 		    	conn = Connections.getDevConnection();
 		    }
@@ -595,10 +598,13 @@ public class ItemService {
 			boolean removed = false; //Will be returned at the end -> feedback
 			String sql="DELETE FROM item WHERE itemId=?";			
 			Connection conn=null;
+			/* AD - Checking for the cloud connection first */
 			try {
 			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
 			    	conn = Connections.getProductionConnection();
 			    }
+			    /* AD - the local connection is used as backup, should the Google Cloud Platform
+			     * 		connection not be successful */
 			    else {
 			    	conn = Connections.getDevConnection();
 			    }
@@ -629,6 +635,7 @@ public class ItemService {
 					e.printStackTrace();
 				}
 			}
+			/* AD - item successfully removed */
 			return removed;
 		}		
 }

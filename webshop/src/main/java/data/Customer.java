@@ -1,6 +1,13 @@
 package data;
 
 
+/**
+ * @author Hossein and Ash
+ *
+ */
+
+/* AD - Class Properties */
+
 public class Customer {
 
 	private int customerId;
@@ -13,7 +20,7 @@ public class Customer {
 	private String phone;
 	private String image;
 	
-	// constructor
+	// AD - parameterised constructor
 	public Customer(int customerId, String firstName, String lastName,  String userName,  String password, String dateOfBirth,  String email,String phone, String image) {
 		super();
 		this.customerId = customerId;
@@ -27,11 +34,13 @@ public class Customer {
 		this.image = image;
 	}
 
-
+	// AD - Default constructor	
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
 
+	/* AD - Setters and Getters */
+	
 	public int getCustomerId() {
 		return customerId;
 	}
