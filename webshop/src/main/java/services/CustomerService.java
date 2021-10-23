@@ -217,7 +217,8 @@ public class CustomerService {
 		/**
 		 * @param Customer customer
 		 * @return customer
-		 * This method receives values from an html form which sends a POST type request.
+		 * AD - This method receives values from a React Native (JavaScript-based) 
+		 * form which (via an async function) sends a POST type request to the Java backend.
 		 */
 		@POST
 		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
@@ -349,7 +350,7 @@ public class CustomerService {
 		/**
 		 * @param id
 		 * void
-		 * This method deletes an customer from then database based on the id number, which is received as a PathParam
+		 * This method deletes an customer from the database based on the id number, which is received as a PathParam
 		 */
 //		@GET
 		@DELETE
