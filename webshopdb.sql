@@ -153,7 +153,7 @@ INSERT INTO item (categoryId, customerId, title, price, description, `condition`
 (1, '1001' , 'Sofa', '180' ,
  'Praesent ut nisi non arcu sodales cursus eget ut nunc. Donec vulputate, lorem faucibus porttitor lacinia, massa diam hendrerit metus, sed pharetra leo velit consequat massa. Donec malesuada elementum condimentum. Etiam leo diam, viverra vitae leo id, auctor suscipit enim.',
  'new', 'Helsinki' ,
- "https://images.unsplash.com/photo-1605774337664-7a846e9cdf17?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80"),
+ "https://images.pexels.com/photos/8662029/pexels-photo-8662029.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
 
 (6, '1001' , 'Boardgame', '120' ,
  'Donec congue neque lacus, id finibus libero commodo id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean laoreet interdum arcu, vitae sodales augue bibendum quis. Sed rhoncus arcu ex, ut luctus velit posuere a. Morbi in nibh metus.',
@@ -173,7 +173,18 @@ INSERT INTO item (categoryId, customerId, title, price, description, `condition`
 (1, '1002' , 'Sofa', '195' ,
  'Sed at erat molestie, efficitur mi id, vehicula augue. Vestibulum non libero ac mi condimentum venenatis et a arcu. Donec malesuada elementum condimentum. Etiam leo diam, viverra vitae leo id, auctor suscipit enim.',
  'new', 'Helsinki' ,
- "https://images.unsplash.com/photo-1605774337664-7a846e9cdf17?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80"),
+ "https://images.pexels.com/photos/7018400/pexels-photo-7018400.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
+
+(1, '1001' , 'Sofa', '156' ,
+ 'Sed at erat molestie, efficitur mi id, vehicula augue. Vestibulum non libero ac mi condimentum venenatis et a arcu. Donec malesuada elementum condimentum. Etiam leo diam, viverra vitae leo id, auctor suscipit enim.',
+ 'used', 'Helsinki' ,
+ "https://images.pexels.com/photos/5490904/pexels-photo-5490904.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
+
+(1, '1000' , 'Sofa', '199.99' ,
+ 'Sed at erat molestie, efficitur mi id, vehicula augue. Vestibulum non libero ac mi condimentum venenatis et a arcu. Donec malesuada elementum condimentum. Etiam leo diam, viverra vitae leo id, auctor suscipit enim.',
+ 'used', 'Helsinki' ,
+ "https://images.pexels.com/photos/6933860/pexels-photo-6933860.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
+
 
 (1, '1000' , 'Sofa', '215' ,
  'Praesent ut nisi non arcu sodales cursus eget ut nunc. Donec vulputate, lorem faucibus porttitor lacinia, massa diam hendrerit metus, sed pharetra leo velit consequat massa. Donec malesuada elementum condimentum. Etiam leo diam, viverra vitae leo id, auctor suscipit enim.',
