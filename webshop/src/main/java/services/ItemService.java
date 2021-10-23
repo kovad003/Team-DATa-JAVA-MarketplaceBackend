@@ -278,7 +278,8 @@ public class ItemService {
 	}
 	
 	
-	// ASH - creates a service for getting all of the items for a specific customer
+	/* ASH - creates a service for getting all of the items 
+	 * (posted for sale to the app marketplace) for a specific customer */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getcustomeritems/{customerId}")
@@ -335,12 +336,6 @@ public class ItemService {
 		return list;
 	}
 
-	
-	
-	
-	
-	
-	
 	
 // ********************************************************************************end
 	
@@ -418,7 +413,8 @@ public class ItemService {
 		/**
 		 * @param Item item
 		 * @return item
-		 * This method receives values from an html form which sends a POST type request.
+		 * AD - This method receives values from a React Native (JavaScript-based) 
+		 * form which (via an async function) sends a POST type request to the Java backend.
 		 */
 		@POST
 		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
@@ -428,10 +424,13 @@ public class ItemService {
 			System.out.println("public Item addJsonItem(Item item) {");
 			String sql="INSERT INTO item (categoryId, customerId, title, price, description, image, `condition`, location) VALUES(?,?,?,?,?,?,?,?)";
 			Connection conn=null;
+			/* AD - Checking for the cloud connection first */
 			try {
 			    if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {  
 			    	conn = Connections.getProductionConnection();
 			    }
+			    /* AD - the local connection is used as backup, should the Google Cloud Platform 
+			    connection not be successful */
 			    else {
 			    	conn = Connections.getDevConnection();
 			    }
@@ -441,6 +440,7 @@ public class ItemService {
 			}
 			PreparedStatement pstmt;
 			try {
+				/* AD - Prepared statements */
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, item.getCategoryId());
 				pstmt.setInt(2, item.getCustomerId());
@@ -463,7 +463,7 @@ public class ItemService {
 //					e.printStackTrace();
 				}
 			}
-			
+			/* AD - item successfully added */
 			item.setTitle(item.getTitle());
 			return item;
 		}
@@ -589,6 +589,14 @@ public class ItemService {
 			return removed;
 		}
 		
+		/**
+		 * @param item
+		 * void
+		 * AD - This method deletes an item from the database.
+		 * The method receives object as a JSON string, and conversely
+		 * it returns an object in the same manner.
+		 *  
+		 */
 		@DELETE
 		@Path("/deletejsonitem")
 		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
@@ -617,8 +625,8 @@ public class ItemService {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, item.getItemId());
 				pstmt.execute();
-				// Verifying Removal
-				if (pstmt.getUpdateCount() == 1) { // Return the affected number of rows
+				// Verifies the item removal
+				if (pstmt.getUpdateCount() == 1) { // Returns the affected number of rows
 					removed = true;
 					System.out.println("successfully deleted");
 				}
