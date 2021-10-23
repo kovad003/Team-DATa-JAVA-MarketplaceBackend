@@ -414,7 +414,8 @@ public class ItemService {
 		 * @param Item item
 		 * @return item
 		 * AD - This method receives values from a React Native (JavaScript-based) 
-		 * form which (via an async function) sends a POST type request to the Java backend.
+		 * form which (via an async function) sends a POST type request 
+		 * to the Java backend.
 		 */
 		@POST
 		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
