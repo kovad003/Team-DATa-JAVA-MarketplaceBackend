@@ -3,13 +3,15 @@ package data;
 
 /**
  * @author Hossein and Ash
- * This is for the candidate part of the restful web service
- * This standard java class has been utilised inside of the
- * 'data' package.
+ *  This data class is for the customer part of the restful 
+ *  web service. This standard java class has been utilised inside of the
+ *  'data' package. The file includes setters and getters.
  *
  */
 public class Customer {
 
+	/* AD - Attributes of the Customer class */
+	
 	/**
 	 *  customerId - int based value for the customerId column in the customer table.
 	 */
@@ -83,11 +85,11 @@ public class Customer {
 		// TODO Auto-generated constructor stub
 	}
 
-	/* AD - Setters and Getters */
+	/* AD - Setters and Getters of the Customer class */
 	
 	/**
 	 * customerId getter method
-	 * @return (int value) from the customer table.
+	 * @return the customerId (int value) from the customer table.
 	 */
 	public int getCustomerId() {
 		return customerId;
