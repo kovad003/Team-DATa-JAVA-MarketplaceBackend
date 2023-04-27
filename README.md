@@ -1,6 +1,9 @@
 # Team-DATa-JAVA-MarketplaceBackend
 Restful JAVA Backend for our Marketplace React Native app
 
+# Link for Frontend
+https://github.com/kovad003/Team-DATa-RN-MarketplaceApp
+
 # Description
 The Second Hand Store Application built with React Native and Google App Engine is a mobile app that enables users to browse and purchase second-hand items. The app features user authentication, a search and browse functionality for second-hand items, a shopping cart, and a checkout process. The application is built using React Native, a popular mobile application development framework, and uses a Java RESTful backend to handle data management and processing.
 
